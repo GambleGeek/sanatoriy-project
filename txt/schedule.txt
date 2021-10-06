@@ -1,0 +1,16 @@
+Days/Time	8:00-10:00		10:00-10:30			10:30-12:00		13:00-14:00		14:00-15:00		15:00-16:00		18:00-19:00		19:00-21:00
+=========	==========		============		============	===========		===========		===========		===========		===========	
+Monday		Acupuncture		Herbal medicine		------------	Physiotherapy	-----------		-----------		-----------		Baths
+
+Tuesday		-----------		Herbal medicine		Phototherapy	-------------	-----------		Mud therapy		-----------		Baths
+
+Wednesday	Acupuncture		Herbal medicine		------------	-------------	-----------		-----------		-----------		Baths
+
+Thursday	-----------		Herbal medicine		Phototherapy	-------------	-----------		Mud therapy		-----------		Baths
+
+Friday		Acupuncture		Herbal medicine		------------	Physiotherapy	-----------		-----------		-----------		Baths
+
+Saturday	-----------		Herbal medicine		Phototherapy	-------------	Massage			-----------		Hydromassage	Baths
+
+Sunday		-----------		---------------		------------	-------------	Massage			-----------		Hydromassage	Baths									
+

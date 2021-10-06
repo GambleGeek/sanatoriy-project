@@ -1,0 +1,31 @@
+	Paid procedures
+	List of checks
+
+
+================================
+Check
+Procedure name : Acupuncture
+Price : 150
+Time : 21:44:38
+================================
+
+================================
+Check
+Procedure name : Massage
+Price : 140
+Time : 10:55:08
+================================
+
+================================
+Check
+Procedure name : Massage
+Price : 140
+Time : 11:19:36
+================================
+
+================================
+Check
+Procedure name : Massage
+Price : 140
+Time : 11:43:24
+================================

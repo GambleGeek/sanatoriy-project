@@ -1,0 +1,47 @@
+- To work with the program you need
+log into your account. First you should
+select the type of account by specifying 
+the appropriate key word:
+
+  Assistant:    assistant
+  Manager:      manager
+  Assistant:    director
+  Client:       client
+  Cook:         cooker
+
+- After selecting an account, you need to enter
+login and password of the selected account:
+
+
+  Assistant Account:
+  	Login:          assistant123
+  	Password:       the_best
+
+  Manager Account:
+	Login:          Manager
+	Password:       Password
+
+  Director's account:
+    Login:          director
+    Password:       directorrr
+
+  Patient Account:
+	Login:          Patient
+	Password:       Password
+
+  Cooker Account:
+	Login:          cooker123
+	Password:       cooker
+
+- After successful authorization opens
+the menu of a specific account for work
+with the program.
+- Each account has its own specific
+functionality depending on the type of account.
+All functions are numbered 1,2,3 and so
+further. To start working with
+program you need to choose the one you need
+function from the menu. If you have finished, 
+then enter: 0 and the Main Menu of the program will open.
+From the Main Menu, you can continue working with
+program or exit.

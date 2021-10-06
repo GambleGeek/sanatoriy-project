@@ -1,0 +1,29 @@
+                          
+======MENU of Remmi(Rotatui)======     
+
+ 
+ - Shorpo ---------- 120som 
+ - Samsy ----------- 40som  
+ - Plov ------------ 150som 
+ - Shashlyk -------- 45som
+ - Sup (Ris) ------- 100som
+ - Sup (Belyi Ris) - 100som
+ - Sup (Kapusta)---- 100som
+ - Sup (Borsh) ----- 100som
+ - Dymdama --------- 150som
+ - Manty ----------- 140som
+ - Kasha (Rysovaia)- 60som
+ - Kasha (Mana) ---- 60som
+ - Samsy (meal) ---- 40som
+ - Samsy (chiken) -- 40som
+ - Samsy (potatos)-- 30som
+ - Samsy (onion) --- 30som
+ - Salat (scezar)--- 40som
+ - Salat (alivee)--- 45som
+ - Salat (Krabovye)- 40som
+ - Salat (Funchosa)- 35som
+ - Kampot ---------- 15som
+ - tea ------------- 10som
+ - Kampot (apple)--- 15som
+ - kampot (tomatos-- 15som
+ - Coffee ---------- 20som
