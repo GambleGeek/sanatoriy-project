@@ -33,7 +33,7 @@ public class Main {
             else if(menu.equals("2")){
                 System.out.println(PURPLE_BOLD + "\t\t\tFAQ" + RESET);
                 try{
-                    FileReader fReader = new FileReader("info.txt");
+                    FileReader fReader = new FileReader("text\\info.txt");
                     Scanner sc = new Scanner(fReader);
 
                     while(sc.hasNextLine()){
