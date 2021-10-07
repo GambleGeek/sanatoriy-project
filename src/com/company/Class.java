@@ -1,5 +1,8 @@
 package com.company;
 
 public class Class {
-    System.out.println("231313")
+        void display(){
+
+            System.out.println("231313");
+    }
 }
