@@ -1,7 +1,10 @@
 package com.example.demoSan.security;
 
+import com.example.demoSan.security.auth.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -19,15 +23,14 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DataSource dataSource;
+    private final PasswordEncoder passwordEncoder;
+    private final UserService applicationUserService;
 
     @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-            auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select Login, Password, isEnabled from worker where Login=?")
-                .authoritiesByUsernameQuery("select Login, authority from worker where Login=?");
+    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder,
+                             UserService applicationUserService){
+        this.passwordEncoder = passwordEncoder;
+        this.applicationUserService = applicationUserService;
     }
 
     @Override
@@ -43,9 +46,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/san/login").permitAll()
+//                    .loginPage("/san/login").permitAll()
                     .passwordParameter("password")
                     .usernameParameter("username")
+                    .successHandler(loginSuccessHandler)
                 .and()
                 .logout()
                     .logoutUrl("/logout")
@@ -57,9 +61,26 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setUserDetailsService(applicationUserService);
+        return provider;
+    }
+
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
+
+    @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
                 .antMatchers("/css/**", "/js/**", "/image/**"); // #3
     }
+
 }
