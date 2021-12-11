@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-5 mb-5">
+
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-12 text-center">
+            <h2 th:text="${'History of having ' + procedure.getName()}">History</h2>
+        </div>
+        <table class="table table-striped mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">Treatment ID</th>
+                    <th scope="col">Name of Procedure</th>
+                    <th scope="col">Date of having Procedure</th>
+                    <th scope="col">Time of having Procedure</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="treatment: ${treatmentHistory}">
+                <td th:text="${treatment.getTreatmentID()}">treatmentID</td>
+                <td th:text="${procedure.getName()}">name</td>
+                <td th:text="${treatment.getDateString()}">date</td>
+                <td th:text="${treatment.getTimeString()}">time</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
