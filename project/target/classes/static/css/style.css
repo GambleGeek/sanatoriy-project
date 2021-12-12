@@ -1,0 +1,477 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300');
+*
+
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+    outline: none;
+}
+
+@import url(//db.onlinewebfonts.com/c/4b5ae315f5df148f0ab479a7cedc9832?family=ISOCPEUR:1000);
+
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+body{
+    min-height: 100vh;
+    background: linear-gradient(lightblue, #9affe1);
+    overflow-x: hidden;
+}
+
+/* 
+лоадер страницы */
+.preloader {
+    /*фиксированное позиционирование*/
+    position: fixed;
+    /* координаты положения */
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /* фоновый цвет элемента */
+    background: #e0e0e0;
+    /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+    z-index: 10011;
+  }
+  
+.preloader__row 
+{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    margin-left: -35px;
+    text-align: center;
+    animation: preloader-rotate 2s infinite linear;
+}
+
+.preloader__item 
+{
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    background-color: #337ab7;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    animation: preloader-bounce 2s infinite ease-in-out;
+}
+
+.preloader__item:last-child 
+{
+    top: auto;
+    bottom: 0;
+    animation-delay: -1s;
+}
+
+@keyframes preloader-rotate 
+{
+100% 
+{
+    transform: rotate(360deg);
+}
+}
+
+@keyframes preloader-bounce 
+{
+0%,
+100% 
+{
+    transform: scale(0);
+}
+
+50% 
+{
+    transform: scale(1);
+}
+}
+
+.loaded_hiding .preloader 
+{
+    transition: 0.3s opacity;
+    opacity: 0;
+}
+
+.loaded .preloader 
+{
+    display: none;
+}
+
+/* анимации */
+
+.element-animation 
+{
+    margin: 2rem 0;
+    font-size: 3rem;
+
+    /* Скроем элемент в начальном состоянии */
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.element-animation.element-show 
+{
+    opacity: 1;
+    transition: all 1.5s;
+    transform: translateY(0%);
+}
+
+header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10000;
+}
+
+header img
+{
+    height: 130px;
+    width: 130px;
+}
+
+header .logo
+{
+    font-weight: 1000;
+    text-decoration: none;
+    font-size: 2em;
+    text-transform: lowercase;
+    letter-spacing: 2px;
+    font-family: 'ISOCPEUR';
+}
+header ul
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header ul li
+{
+    list-style: none;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+header ul li a
+{
+    text-decoration: none;
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+header ul li a:hover,
+header ul li a.active
+
+{
+    background: white;
+    color: #2b1055;
+}
+
+section
+{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+section::before
+{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #79ffd7, transparent);
+    z-index: 1000;
+}
+
+section img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+section img#moon
+{
+    mix-blend-mode: screen;
+}
+
+h1
+{
+    margin: 80px 0
+}
+
+#text
+{
+    position: absolute;
+    color: whitesmoke;
+    font-weight: 1000;
+    white-space: nowrap;
+    font-size: 7.5vw;
+    overflow-y: hidden;
+    margin-bottom: 100px;
+    font-family: 'ISOCPEUR';
+}
+
+#description
+{
+    position: absolute;
+    font-size: 1.5vw;
+    text-align: center;
+    white-space: nowrap;
+    display: block;
+    margin-bottom: -100px;
+}
+
+#btn
+{
+    text-decoration: none;
+    display: block;
+    padding: 8px 30px;
+    border-radius: 40px;
+    background: #fff;
+    color: #2bff8b;
+    font-size: 1.5em;
+    transform: translateY(110px);
+    width: 100px;
+    height: 35px;
+}
+
+#btn img
+{
+    height: 25px;
+    width: 25px;
+    margin-left: 37px;
+    margin-top: 5px;
+    border: 50px;
+}
+
+#btn img:hover
+{
+    margin-top: -20px;
+}
+
+.sec
+{
+    position: relative;
+    padding: 100px;
+    background: #7fffd9;
+}
+
+.sec h2
+{
+    font-size: 3.5em;
+    margin-bottom: 10px;
+}
+
+.sec p
+{
+    font-size: 1.2em;
+}
+
+.footer
+{
+    text-align: center;
+    justify-content: center;
+    background: gray;
+}
+
+.row img
+{
+    height: 100px;
+    width: 100px;
+    margin-left: 140px;
+}
+
+.reserve button
+{
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+}
+
+.reserve input
+{
+    width: 350px;
+}
+
+.reserve li
+{
+    list-style: none;
+    display: inline;
+    margin-left: 10px;
+}
+
+.sec .reserve
+{
+    border-radius: 10px;
+}
+
+.container .row .reserve
+{
+    margin-left: 150px;
+    width: 76%;
+}
+
+/* номера */
+.main_nomera p
+{   
+    width: 45%;
+    float: right;
+}
+
+div.overlay
+{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 100000;
+}
+
+.noscroll{
+    overflow: hidden;
+}
+
+
+div.overlay > div.login-wrapper
+{
+    align-self: center;
+    background-color: rgba(0, 0, 0, .25);
+    padding: 6px;
+    width: 450px;
+    border-radius: 2px;
+}
+
+div.overlay > div.login-wrapper > div.login-content
+{
+    background-color: rgb(255, 255, 255);
+    border-radius: 2px;
+    padding: 24px;
+    position: relative;
+}
+
+div.overlay > div.login-wrapper > div.login-content > h3
+{
+    color: rgb(0, 0, 0);
+    font-family: Montserrat, sans-serif;
+    font-size: 1.8em;
+    margin: 0 0 1.25em;
+    padding: 0;
+}
+
+a.close
+{
+    background-color: rgb(204, 204, 204);
+    border-radius: 50%;
+    color: rgb(255, 255, 255);
+    display: block;
+    font-family: Montserrat, sans-serif;
+    font-size: .8em;
+    padding: .2em .5em;
+    position: absolute;
+    top: 1.25em;
+    transition: all 400ms ease;
+    right: 1.25em;
+}
+
+    a.close:hover
+    {
+        background-color: #1bc5b3;
+        cursor: pointer;
+    }
+
+form label
+{
+    color: rgb(0, 0, 0);
+    display: block;
+    font-family: Montserrat, sans-serif;
+    font-size: 1.25em;
+    margin: .75em 0;
+}
+
+    form input[type="text"],
+    form input[type="password"],
+    form textarea
+    {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(186, 186, 186);
+        border-radius: 1px;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+        display: block;
+        font-size: .65em;
+        margin: 6px 0 12px 0;
+        padding: .8em .55em;
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+        transition: all 400ms ease;
+        width: 90%;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="password"]:focus,
+    form textarea:focus,
+    form select:focus
+    {
+        border-color: #4196fc;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+    }
+
+    form input[type="text"]:invalid:focus,
+    form input[type="password"]:invalid:focus,
+    form textarea:invalid:focus,
+    form select:invalid:focus
+    {
+        border-color: rgb(248, 66, 66);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgb(248, 66, 66);
+    }
+
+    form button {
+        background-color: #50c1e9;
+        border: 1px solid rgba(0,0,0,.1);
+        color: rgb(255,255,255);
+        font-family: 'Varela Round', sans-serif;
+        font-size: .85em;
+        padding: .55em .9em;
+        transition: all 400ms ease;    
+    }
+
+        form button:hover {
+            background-color: #1bc5b3;
+            cursor: pointer;
+        }
+
+
+
