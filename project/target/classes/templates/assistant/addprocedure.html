@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>Add Procedure</title>
+</head>
+<body>
+
+<div class="col-md-12 mt-3 container mt-5">
+    <div class="row bg-white border-bottom border-primary pb-4">
+        <div class="col-md-12 mt-3 position-relative">
+            <img class="rounded" th:src="@{/image/backphone1.jpg}" style="height: 180px; width: 100%;">
+        </div>
+        <div class="col-md-4 position-absolute" style="top: 70px; left: 130px;">
+            <img th:src="@{/image/{id}.jpg(id=${worker.getWorkerId()})}" class="rounded" style="width: 300px; height: 220px;">
+        </div>
+        <div class="col-md-8 position-relative" style="left: 340px;">
+            <h3 th:text="${worker.getName()}" class="mb-1">NAME</h3>
+            <p th:text="${worker.getPosition()}" class="mb-1 fs-5">Position</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 mt-4 container">
+    <div class="row bg-white">
+        <div class="col-md-3 bg-light border border-primary rounded" style="height: 650px;">
+            <div class="row pt-2">
+                <img class="col-md-4" th:src="@{/image/logo.png}" alt="logo" height="70px" width="70px">
+                <span class="col-md-6 pt-3">
+                    <a th:href="@{/assistant}" style="text-decoration: none;">
+                        <span class="h2 text-dark">Sanatorium</span>
+                     </a>
+                </span>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li>
+                    <a th:href="@{/assistant/{id}(id=${worker.getWorkerId()})}" class="nav-link fs-5">
+                        <span class="fs-2 text-dark">
+                            <i class="fas fa-home"></i>
+                        </span>
+                        <b class="text-dark">Home page</b>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/assistant/{id}/allprocedures(id=${worker.getWorkerId()})}" class="nav-link fs-5">
+                    <span class="fs-2 text-info">
+                        <i class="fas fa-procedures"></i>
+                    </span>
+                        <b>All procedures list</b>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/assistant/{id}/allclients(id=${worker.getWorkerId()})}" class="nav-link fs-5">
+                    <span class="fs-2 text-info">
+                        <i class="fas fa-users"></i>
+                    </span>
+                        <b>All clients list</b>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/assistant/schedule}" class="nav-link fs-5">
+                    <span class="fs-2 text-info">
+                        <i class="far fa-clock"></i>
+                    </span>
+                        <b>Procedure's Schedule</b>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/assistant}" class="nav-link fs-5">
+                    <span class="fs-2 text-info">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </span>
+                        <b>Exit</b>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="border-top border-primary my-3">
+                <img class="img-fluid rounded my-3" th:src="@{/image/banner1.jpg}" alt="Banner" style="position: relative;">
+                <div class="text-white" style="position: absolute; top: 810px; left: 190px;">
+                    <h4>What is new?</h4>
+                </div>
+            </div>
+        </div>
+
+        <!--Основной контент-->
+        <div class="col-md-9 bg-light rounded pb-3">
+             <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 border rounded text-center py-3">
+                    <div class="row">
+                        <div class="col-md-12"><h5>Confirm</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-justify-center" th:text="${worker.getName() + ', do you want to add ' + procedure.getName() + ' procedure?'}">Do you want to add this procedure?</p>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <form th:action="@{/assistant/{id}/allprocedures(id=${worker.getWorkerId()})}">
+                            <input class="btn btn-outline-success btn-sm px-5 mr-2" type="submit" value="No"/>
+                        </form>
+                        <form method="POST" th:action="@{/assistant/{id}/allprocedures(id=${worker.getWorkerId()})}">
+                            <input type="hidden" th:value="${worker.getWorkerId()}" name="workerId" id="workerId" th:object="${workerId}">
+                            <input type="hidden" th:value="${procedure.getId()}" name="procedureId" id="procedureId" th:object="${procedureId}">
+                            <input class="btn btn-success btn-sm px-5" type="submit" value="Yes"/>
+                        </form>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-info mt-5">
+    <div class="text-center text-white pt-4 pb-4">
+        <p class="fs-5">Copyright © 2021. San</p>
+    </div>
+</div>
+</body>
+</html>

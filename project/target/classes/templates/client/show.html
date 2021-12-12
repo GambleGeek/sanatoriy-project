@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        a{
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5 mb-5 px-5">
+
+    <div class="d-flex justify-content-center row">
+
+        <div class="col-md-12 text-center">
+            <h2>My card</h2>
+        </div>
+
+        <div class="col-md-12 mt-3">
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-4">
+                    <img th:src="@{/image/{id}.jpg(id=${client.getId()})}" class="img-fluid">
+                </div>
+                <div class="col-md-8 border-left">
+                    <h3 th:text="${client.getName()}" class="mb-1">NAME</h3>
+                    <span th:text="'Birthdate: ' + ${client.getBirthdate()}">mm.dd.yyyy</span><br>
+                    <div class="mt-1" th:text="'Illness: ' + ${client.getIllness()}">Illness</div>
+                    <div class="mt-1">
+                        <span th:text="'Gender: ' + ${client.getGender()}">Gender</span>&emsp;
+                        <span th:text="'Bloodtype: ' + ${client.getBloodtype()}">Bloodtype</span>&emsp;
+                        <span th:text="'Rezus: ' + ${client.getRezus()}">Rezus</span>
+                    </div>
+                    <div class="mt-1">
+                        <span th:text="'Height: ' + ${client.getHeight() + ' cm'}">Height</span>&emsp;
+                        <span th:text="'Weight: ' + ${client.getWeight() + ' kg'}">Weight</span>&emsp;
+                    </div>
+                    <div class="mt-1">
+                        <span th:text="'Address: ' + ${client.getAddress()}">Address</span>
+                    </div>
+                    <div class="mt-1">
+                        <span th:text="'Arrived on: ' + ${reservation.getArrivedString}"></span>&emsp;
+                        <span th:text="'Moved out: ' + ${reservation.getMoved_outString}"></span>
+                    </div>
+                    <div class="mt-1">
+                        <span th:text="'My room: ' + ${reservation.getRoomID()}"></span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-2">
+                        <a th:href="@{/client/{id}/myprocedures(id=${client.getId()})}" class="btn btn-primary active mr-1" role="button" aria-pressed="true">My procedures</a>
+                        <a th:href="@{/client/{id}/allprocedures(id=${client.getId()})}" class="btn btn-primary active mr-1" role="button" aria-pressed="true">All procedures</a>
+                        <a th:href="@{/client/{id}/checks(id=${client.getId()})}" class="btn btn-primary active" role="button" aria-pressed="true">My purchases</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
