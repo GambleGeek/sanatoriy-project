@@ -100,7 +100,7 @@ public class TreatmentPurchaseDAO {
 
     public static List<Treatment> showLastTreatments(int clientId){
         List procedures = jdbcTemplate.queryForList("SELECT DISTINCT ProcedureID FROM treatment WHERE ClientID=?",
-                new Object[]{clientId});
+                new Object[]{clientId}, Integer.class);
         ArrayList<Treatment> treatments = new ArrayList<>();
         Map parameters = new HashMap();
         parameters.put("clientID", clientId);
@@ -113,10 +113,9 @@ public class TreatmentPurchaseDAO {
                 "    WHERE t.ProcedureID = ? AND t.ClientID = ?\n" +
                 ") AND p.ProcedureID = ?";
         for (Object i: procedures){
-
+            parameters.replace("procedureID", i);
             treatments.add(jdbcTemplate.queryForObject(SQL, new Object[]{i, clientId, i}, new TreatmentWithNameMapper()));
         }
-
         return treatments;
     }
 }

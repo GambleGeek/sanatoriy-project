@@ -137,14 +137,15 @@
                         <div th:each="procedure: ${myProcedures}">
                             <div class="col">
                                 <div class="card" style="width: 18rem;">
-                                    <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${procedure.getId()})}">
+                                    <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${procedure.getProcedureID()})}">
                                     <div class="card-body text-center">
-                                        <a th:href="@{'/assistant/' + ${workerId} + '/allprocedures/{id}'(id=${procedure.getId()})}" style="text-decoration: none">
-                                            <h5 class="card-text" th:text="${procedure.getName()}">Procedure name</h5>
+                                        <a th:href="@{'/assistant/' + ${workerId} + '/allprocedures/{id}'(id=${procedure.getProcedureID()})}" style="text-decoration: none">
+                                            <h5 class="card-text" th:text="${procedure.getProcedureName()}">Procedure name</h5>
                                         </a>
-                                        <h4 class="mr-1 mt-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4>
-                                        <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
-                                        <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
+                                        <!--                                        <h4 class="mr-1 mt-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4>-->
+                                        <!--                                        <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>-->
+                                        <p th:text="${procedure.getDateString()}"></p>
+                                        <p th:text="${procedure.getTimeString()}"></p>
                                     </div>
                                 </div>
                             </div>

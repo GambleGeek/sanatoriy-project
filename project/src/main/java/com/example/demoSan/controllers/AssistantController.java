@@ -140,7 +140,8 @@ public class AssistantController {
         model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
         model.addAttribute("client", ClientDAO.showClient(ClientId));
         model.addAttribute("reservation", ClientDAO.showReservation(ClientId));
-        model.addAttribute("myProcedures", ProcedureDAO.myProcedures(ClientId));
+        model.addAttribute("myProcedures", TreatmentPurchaseDAO.showLastTreatments(ClientId));
+//        model.addAttribute("myProcedures", ProcedureDAO.myProcedures(ClientId));
         model.addAttribute("boughtProcedures", ProcedureDAO.clientBoughtProcedures(ClientId));
         model.addAttribute("workerId", WorkerId);
         return "assistant/showclient";
