@@ -8,6 +8,7 @@ public class Treatment {
     private int ClientID, ProcedureID, TreatmentID;
     private Date Date;
     private Time Time;
+    private String procedureName;
 
     public Treatment(){}
 
@@ -62,6 +63,14 @@ public class Treatment {
 
     public void setTime(java.sql.Time time) {
         Time = time;
+    }
+
+    public String getProcedureName() {
+        return procedureName;
+    }
+
+    public void setProcedureName(String procedureName) {
+        this.procedureName = procedureName;
     }
 
     public String getDateString(){
