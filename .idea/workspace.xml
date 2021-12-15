@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4acb955-d3e1-4a11-913b-fa6433629a8d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sanatoriy-project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_12_2021_2_59_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_12_2021_2_59__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assistantAccount/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clientAccount/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/san.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +12,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="testing" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,6 +50,9 @@
     </option>
   </component>
   <component name="ProjectId" id="228MJxbaKWx4fHtmRoTEl036d1j" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,12 +62,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/database" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/project/src/main/resources/templates" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\resources\templates" />
+      <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\java\com\example\demoSan\models" />
+      <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\java\com\example\demoSan\controllers" />
+      <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\java\com\example\demoSan\dao" />
       <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\database" />
     </key>
   </component>
