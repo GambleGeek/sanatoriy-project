@@ -9,10 +9,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class TreatmentPurchaseDAO {
@@ -99,5 +96,27 @@ public class TreatmentPurchaseDAO {
     public static List<PurchaseWorker> showAllPurchasesW(int id){
         return jdbcTemplate.query("SELECT * FROM purchase_worker WHERE WorkerID=?", new Object[]{id},
                 new PurchaseWorkerMapper());
+    }
+
+    public static List<Treatment> showLastTreatments(int clientId){
+        List procedures = jdbcTemplate.queryForList("SELECT DISTINCT ProcedureID FROM treatment WHERE ClientID=?",
+                new Object[]{clientId}, Integer.class);
+        ArrayList<Treatment> treatments = new ArrayList<>();
+        Map parameters = new HashMap();
+        parameters.put("clientID", clientId);
+        parameters.put("procedureID", null);
+        String SQL = "SELECT p.Name, p.ProcedureID, t.Date, t.Time, t.TreatmentID\n" +
+                "FROM procedures p INNER JOIN treatment t\n" +
+                "WHERE t.TreatmentID=(\n" +
+                "  SELECT MAX(t.TreatmentID)\n" +
+                "    FROM treatment t\n" +
+                "    WHERE t.ProcedureID = ? AND t.ClientID = ?\n" +
+                ") AND p.ProcedureID = ?";
+        for (Object i: procedures){
+            parameters.replace("procedureID", i);
+            treatments.add(jdbcTemplate.queryForObject(SQL, new Object[]{i, clientId, i}, new TreatmentWithNameMapper()));
+        }
+
+        return treatments;
     }
 }

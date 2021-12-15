@@ -1,6 +1,7 @@
 package com.example.demoSan.models;
 
 import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -10,10 +11,19 @@ public class Procedure {
     private int id, price, schedule;
     private String name;
     private Time start_at, end_at;
+    private String start_atString, end_atString;
     final String pattern = "HH:mm";
     final String[] Weekdays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     public Procedure(){}
+
+    public Procedure(int id, String name, int price, String start_at, String end_at) throws ParseException {
+        this.id = id;
+        this.price = price;
+        this.name = name;
+        this.start_at = convertToTime(start_at);
+        this.end_at = convertToTime(end_at);
+    }
 
     public Procedure(int id, int price, int schedule, String name, Time start_at, Time end_at) {
         this.id = id;
@@ -80,6 +90,12 @@ public class Procedure {
 
     public void setEnd_at(Time end_at) {
         this.end_at = end_at;
+    }
+
+    public Time convertToTime(String timeString) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("HH:mm");
+        Time timeValue = new Time(formatter.parse(timeString).getTime());
+        return timeValue;
     }
 
     // представляет значение из БД в виде списка, который заполняет значениями двойки в степенях (в зависимости от дня недели)
@@ -214,5 +230,12 @@ public class Procedure {
         // правда - процедура ещё не проводилась
         if (contains) return false;
         else return true;
+    }
+
+    public float getPriceDiscount(){
+        float result = 0;
+        float discount = this.price * 0.5f;
+        result = this.price - discount;
+        return result;
     }
 }

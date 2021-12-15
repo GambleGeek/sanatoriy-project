@@ -111,4 +111,9 @@ public class ProcedureDAO {
         jdbcTemplate.update("UPDATE purchase SET procedure_taken=1 WHERE ClientID=? AND ProcedureID=?",
                 clientId, procedureId);
     }
+
+    public static void editProcedure(int procedureId, Procedure procedure){
+        jdbcTemplate.update("UPDATE procedures SET Name=?, Price=?, Start_at=?, End_at=? WHERE ProcedureID=?",
+                procedure.getName(), procedure.getPrice(), procedure.getStart_at(), procedure.getEnd_at(), procedureId);
+    }
 }

@@ -93,7 +93,7 @@ public class AssistantController {
         PurchaseWorker p = new PurchaseWorker(WorkerID, ProcedureID);
         TreatmentPurchaseDAO.addPurchaseW(p);
         // перенаправление на чек. (отправит на чек последней покупки)
-        return "redirect:/assistant/"+ id +"/check" + TreatmentPurchaseDAO.showLastPurchase().getPurchaseID();
+        return "redirect:/assistant/"+ id +"/check" + TreatmentPurchaseDAO.showLastPurchaseW().getPurchaseID();
     }
 
     // отображение чека с покупки
@@ -101,10 +101,10 @@ public class AssistantController {
     public String showCheck(@PathVariable("checkN") int PurchaseId,
                             Model model){
         // создаём объект Покупки, чтобы извлечь ID процедуры и клиента
-        PurchaseWorker purchase = TreatmentPurchaseDAO.showPurchaseW(PurchaseId);
-        model.addAttribute("worker", WorkerDAO.showWorker(purchase.getWorkerID()));
-        model.addAttribute("procedure", ProcedureDAO.showProcedure(purchase.getProcedureID()));
-        model.addAttribute("check", purchase);
+        PurchaseWorker purchaseWorker = TreatmentPurchaseDAO.showPurchaseW(PurchaseId);
+        model.addAttribute("worker", WorkerDAO.showWorker(purchaseWorker.getWorkerID()));
+        model.addAttribute("procedure", ProcedureDAO.showProcedure(purchaseWorker.getProcedureID()));
+        model.addAttribute("check", purchaseWorker);
         return "assistant/purchasecheck";
     }
 
@@ -140,7 +140,8 @@ public class AssistantController {
         model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
         model.addAttribute("client", ClientDAO.showClient(ClientId));
         model.addAttribute("reservation", ClientDAO.showReservation(ClientId));
-        model.addAttribute("myProcedures", ProcedureDAO.myProcedures(ClientId));
+        model.addAttribute("myProcedures", TreatmentPurchaseDAO.showLastTreatments(ClientId));
+//        model.addAttribute("myProcedures", ProcedureDAO.myProcedures(ClientId));
         model.addAttribute("boughtProcedures", ProcedureDAO.clientBoughtProcedures(ClientId));
         model.addAttribute("workerId", WorkerId);
         return "assistant/showclient";
@@ -157,7 +158,7 @@ public class AssistantController {
         ProcedureDAO.setProcedureAsVisited(procedureID,clientID);
         Treatment t = new Treatment(clientID, procedureID);
         TreatmentPurchaseDAO.addTreatment(t);
-        return "redirect:/assistant/"+ WorkerId +"/allclients";
+            return "redirect:/assistant/"+ WorkerId +"/allclients";
     }
 
     // расписание процедур
