@@ -121,6 +121,7 @@
                                     </div>
                                     <div class="mt-1">
                                         <span th:text="'Address: ' + ${client.getAddress()}">Address</span>
+                                        <span th:text="${valueOfProc}">123</span>
                                     </div>
                                     <div class="d-flex mt-2">
                                         <a th:href="@{'/assistant/' + ${workerId} + '/allclients/{id}'(id=${client.getId()})}" class="btn btn-primary active mr-1" role="button" aria-pressed="true">Details</a>

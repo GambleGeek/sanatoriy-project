@@ -1,7 +1,10 @@
 package com.example.demoSan.controllers;
 
+import com.example.demoSan.dao.ClientDAO;
 import com.example.demoSan.dao.ProcedureDAO;
+import com.example.demoSan.dao.WorkerDAO;
 import com.example.demoSan.models.Procedure;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +27,17 @@ public class ManagerController {
                                 Model model){
         model.addAttribute("procedure", ProcedureDAO.showProcedure(procedureId));
         return "manager/procedure";
+    }
+
+    // список всех пациентов
+    @GetMapping("/{id}/allclients")
+    public String allclients(@PathVariable("id") int WorkerId,
+                             Model model){
+        model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
+        model.addAttribute("allClients", ClientDAO.clientList());
+        model.addAttribute("workerId", WorkerId);
+        model.addAttribute("valueOfProc", ClientDAO.getClientWithMaxTreatment());
+        return "assistant/clientlist";
     }
 
     @GetMapping("/allprocedures/{procedureId}/edit")

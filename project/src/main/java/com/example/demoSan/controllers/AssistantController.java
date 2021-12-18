@@ -3,10 +3,13 @@ package com.example.demoSan.controllers;
 import com.example.demoSan.dao.*;
 import com.example.demoSan.models.PurchaseWorker;
 import com.example.demoSan.models.Treatment;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/assistant")
@@ -20,7 +23,7 @@ public class AssistantController {
     }
 
     // страница аккаунта
-@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public String showWorker(@PathVariable("id") int WorkerId,
                              Model model){
         model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
@@ -37,7 +40,7 @@ public class AssistantController {
         model.addAttribute("myProcedures", ProcedureDAO.boughtProcedures(WorkerId));
         model.addAttribute("restProcedures", ProcedureDAO.restProcedures(WorkerId));
         model.addAttribute("workerId", WorkerId);
-        return "assistant/procedurelist";
+        return "assistant/procedures";
     }
 
     // поиск процедуры
@@ -50,7 +53,7 @@ public class AssistantController {
             model.addAttribute("myProcedures", ProcedureDAO.boughtProcedure(WorkerId, ProcedureDAO.findProcedureByName(name).getId()));
             model.addAttribute("restProcedures", ProcedureDAO.restProcedure(WorkerId, ProcedureDAO.findProcedureByName(name).getId()));
             model.addAttribute("workerId", WorkerId);
-            return "findprocedure";
+            return "assistant/findprocedure";
         }
         return "redirect:/assistant/" + WorkerId + "/allprocedures";
     }
@@ -64,6 +67,7 @@ public class AssistantController {
         model.addAttribute("procedure", ProcedureDAO.showProcedure(ProcedureId));
         model.addAttribute("clients", ClientDAO.getClientByProcedure(ProcedureId));
         model.addAttribute("numberOfClients", ClientDAO.getClientByProcedure(ProcedureId).size());
+
         model.addAttribute("workerId", WorkerId);
         return "assistant/showprocedure";
     }
@@ -93,7 +97,7 @@ public class AssistantController {
         PurchaseWorker p = new PurchaseWorker(WorkerID, ProcedureID);
         TreatmentPurchaseDAO.addPurchaseW(p);
         // перенаправление на чек. (отправит на чек последней покупки)
-        return "redirect:/assistant/"+ id +"/check" + TreatmentPurchaseDAO.showLastPurchase().getPurchaseID();
+        return "redirect:/assistant/"+ id +"/check" + TreatmentPurchaseDAO.showLastPurchaseW().getPurchaseID();
     }
 
     // отображение чека с покупки
@@ -101,10 +105,10 @@ public class AssistantController {
     public String showCheck(@PathVariable("checkN") int PurchaseId,
                             Model model){
         // создаём объект Покупки, чтобы извлечь ID процедуры и клиента
-        PurchaseWorker purchase = TreatmentPurchaseDAO.showPurchaseW(PurchaseId);
-        model.addAttribute("worker", WorkerDAO.showWorker(purchase.getWorkerID()));
-        model.addAttribute("procedure", ProcedureDAO.showProcedure(purchase.getProcedureID()));
-        model.addAttribute("check", purchase);
+        PurchaseWorker purchaseWorker = TreatmentPurchaseDAO.showPurchaseW(PurchaseId);
+        model.addAttribute("worker", WorkerDAO.showWorker(purchaseWorker.getWorkerID()));
+        model.addAttribute("procedure", ProcedureDAO.showProcedure(purchaseWorker.getProcedureID()));
+        model.addAttribute("check", purchaseWorker);
         return "assistant/purchasecheck";
     }
 
@@ -115,6 +119,8 @@ public class AssistantController {
         model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
         model.addAttribute("allClients", ClientDAO.clientList());
         model.addAttribute("workerId", WorkerId);
+        model.addAttribute("valueOfProc", ClientDAO.getClientWithMaxTreatment());
+
         return "assistant/clientlist";
     }
 
@@ -158,7 +164,7 @@ public class AssistantController {
         ProcedureDAO.setProcedureAsVisited(procedureID,clientID);
         Treatment t = new Treatment(clientID, procedureID);
         TreatmentPurchaseDAO.addTreatment(t);
-        return "redirect:/assistant/"+ WorkerId +"/allclients";
+            return "redirect:/assistant/"+ WorkerId +"/allclients";
     }
 
     // расписание процедур
