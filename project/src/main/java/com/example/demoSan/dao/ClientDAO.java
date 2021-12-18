@@ -2,15 +2,10 @@ package com.example.demoSan.dao;
 
 import com.example.demoSan.models.Client;
 import com.example.demoSan.models.Reserved;
-import com.fasterxml.jackson.databind.util.Named;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.naming.Name;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +48,25 @@ public class ClientDAO {
         return namedParameterJdbcTemplate.query(SQL,
                 parameters,
                 new ClientMapper());
+    }
+
+    public static List getClientWithMaxTreatment(){
+        List valueOfMaxProcedure = jdbcTemplate.queryForList("SELECT ClientID, COUNT(ProcedureID)\n" +
+                        "FROM treatment\n" +
+                        "GROUP BY ClientID\n" +
+                        "order by COUNT(ProcedureID) desc LIMIT 1;",
+                        Integer.class);
+        return valueOfMaxProcedure;
+    }
+
+    public static int getProcedureByClient(int clientID){
+        List valueOfProcedure = jdbcTemplate.query("SELECT ClientID, COUNT(ProcedureID)\n" +
+                        "                        FROM treatment\n" +
+                        "                        GROUP BY ClientID\n" +
+                        "                        order by ClientID",
+                new TreatmentMapper());
+
+        return valueOfProcedure.size();
     }
 
 }
