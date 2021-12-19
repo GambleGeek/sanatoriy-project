@@ -1,9 +1,9 @@
 package com.example.demoSan.controllers;
 
-import com.example.demoSan.dao.ClientDAO;
-import com.example.demoSan.dao.ProcedureDAO;
-import com.example.demoSan.dao.TreatmentPurchaseDAO;
+import com.example.demoSan.dao.*;
 import com.example.demoSan.models.Purchase;
+import com.example.demoSan.security.IUserId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,68 +13,59 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/client")
 public class ClientController {
 
-    // страница с кликабельным списком всех клиентов
-    @GetMapping("/")
-    public String list(Model model){
-        model.addAttribute("clients", ClientDAO.clientList());
-        return "client/list";
-    }
+    @Autowired
+    private IUserId userId;
 
     // карта клиента по ID
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id,
-                       Model model){
+    @GetMapping("")
+    public String showMyCard(Model model){
         // вытаскиваем данные о клиенте из БД и передаем под атрибутом client
-        model.addAttribute("client", ClientDAO.showClient(id));
+        model.addAttribute("client", ClientDAO.showClient(userId.get()));
         // данные о бронировании клиента. для отображения номера и дат въезда/выезда
-        model.addAttribute("reservation", ClientDAO.showReservation(id));
+        model.addAttribute("reservation", ClientDAO.showReservation(userId.get()));
         return "client/show";
     }
 
     // отображение процедур, полученных клиентом
-    @GetMapping("/{id}/myprocedures")
-    public String myProcedures(@PathVariable("id") int id,
-                               Model model){
-        model.addAttribute("clientId", id);
+    @GetMapping("/myprocedures")
+    public String showMyProcedures(Model model){
+        model.addAttribute("clientId", userId.get());
         // получаем купленные процедуры из БД
-        model.addAttribute("boughtProcedures", ProcedureDAO.clientBoughtProcedures(id));
+        model.addAttribute("boughtProcedures", ProcedureDAO.clientBoughtProcedures(userId.get()));
         // все процедуры, которые клиент получал
-        model.addAttribute("myProcedures", ProcedureDAO.myProcedures(id));
+        model.addAttribute("myProcedures", ProcedureDAO.myProcedures(userId.get()));
         return "client/myProcedureList";
     }
 
     // история получения конкретной процедуры клиентом
-    @GetMapping("/{id}/history{ProcedureId}")
-    public String historyOfProcedureVisit(@PathVariable("id") int clientId,
-                                          @PathVariable("ProcedureId") int procedureId,
+    @GetMapping("/history{ProcedureId}")
+    public String showHistoryOfTreatment(@PathVariable("ProcedureId") int procedureId,
                                           Model model){
         // данные о получении, находимые по ID клиента и процедуры
-        model.addAttribute("treatmentHistory", TreatmentPurchaseDAO.treatmentHistory(clientId, procedureId));
+        model.addAttribute("treatmentHistory", TreatmentPurchaseDAO.treatmentHistory(userId.get(), procedureId));
         // передаем данные о процедуре, чтобы отобразить её название
         model.addAttribute("procedure", ProcedureDAO.showProcedure(procedureId));
         return "client/procedureHistory";
     }
 
     // список всех процедур
-    @GetMapping("/{id}/allprocedures")
-    public String allProcedures(@PathVariable("id") int id,
-                                Model model){
+    @GetMapping("/allprocedures")
+    public String showAllProcedures(Model model){
         // процедуры, которые клиент уже купил. для отключения функции покупки этих процедур
-        model.addAttribute("myProcedures", ProcedureDAO.clientBoughtProcedures(id));
+        model.addAttribute("myProcedures", ProcedureDAO.clientBoughtProcedures(userId.get()));
         // оставшиеся процедуры
-        model.addAttribute("restProcedures", ProcedureDAO.restProcedures(id));
+        model.addAttribute("restProcedures", ProcedureDAO.restProcedures(userId.get()));
         // передаем ID клиента для редиректа на страничку с подтверждением покупки
-        model.addAttribute("clientId", id);
+        model.addAttribute("clientId", userId.get());
         return "client/procedurelist";
     }
 
     // подтверждение покупки процедуры
-    @GetMapping("/{id}/allprocedures/add{ProcedureId}")
-    public String addProcedure(Model model,
-                               @PathVariable("id") int ClientId,
+    @GetMapping("/allprocedures/add{ProcedureId}")
+    public String buyProcedure(Model model,
                                @PathVariable("ProcedureId") int ProcedureId){
         // данные о клиенте для отображения его имени
-        model.addAttribute("client", ClientDAO.showClient(ClientId));
+        model.addAttribute("client", ClientDAO.showClient(userId.get()));
         // данные о процедуре для отображения названия
         model.addAttribute("procedure", ProcedureDAO.showProcedure(ProcedureId));
         return "client/addProcedure";
@@ -82,10 +73,9 @@ public class ClientController {
 
     // ПОСТ-запрос для сохранения покупки
     // с помощью ModelAttribute получаем данные для сохранения покупки в БД
-    @PostMapping("/{id}/allprocedures")
+    @PostMapping("/allprocedures")
     public String savePurchase(@ModelAttribute("procedureId") int ProcedureID,
                                 @ModelAttribute("clientId") int ClientID,
-                                @PathVariable("id") int id,
                                 BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return "procedurelist";
@@ -93,11 +83,11 @@ public class ClientController {
         Purchase p = new Purchase(ClientID, ProcedureID);
         TreatmentPurchaseDAO.addPurchase(p);
         // перенаправление на чек. (отправит на чек последней покупки)
-        return "redirect:/client/"+ id +"/check" + TreatmentPurchaseDAO.showLastPurchase().getPurchaseID();
+        return "redirect:/client/"+ userId.get() +"/check" + TreatmentPurchaseDAO.showLastPurchase().getPurchaseID();
     }
 
     // отображение чека с покупки
-    @GetMapping("/{id}/check{checkN}")
+    @GetMapping("/check{checkN}")
     public String showCheck(@PathVariable("checkN") int PurchaseId,
                             Model model){
         // создаём объект Покупки, чтобы извлечь ID процедуры и клиента
@@ -109,11 +99,10 @@ public class ClientController {
     }
 
     // список чеков
-    @GetMapping("/{id}/checks")
-    public String showAllChecks(@PathVariable("id") int clientId,
-                                Model model){
-        model.addAttribute("purchases", TreatmentPurchaseDAO.showAllPurchases(clientId));
-        model.addAttribute("client", ClientDAO.showClient(clientId));
+    @GetMapping("/checks")
+    public String showAllChecks(Model model){
+        model.addAttribute("purchases", TreatmentPurchaseDAO.showAllPurchases(userId.get()));
+        model.addAttribute("client", ClientDAO.showClient(userId.get()));
         return "client/purchasesAll";
     }
 }

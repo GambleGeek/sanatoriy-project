@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Client</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+<body>
+    
+    <div class="container mt-5 mb-5 px-5">
+
+        <div class="d-flex justify-content-center row">
+    
+            <div class="col-md-12 mt-3">
+                <div class="row p-2">
+                    <div class="col-md-4">
+                        <img src="https://id-test-11.slatic.net/p/c2259a5eeca0604164d18ef1358f9ad2.jpg" class="img-fluid">
+                    </div>
+                    <div class="col-md-7 ml-3">
+                        <h2 th:text="${client.getName()}" class="mb-1">NAME SURNAME</h2>
+                        <p th:text="'Birthdate: ' + ${client.getBirthdate()}">mm.dd.yyyy</p>
+                        <p class="mt-1" th:text="'Illness: ' + ${client.getIllness()}">Illness</p>
+                        <p class="mt-1">
+                            <span th:text="'Gender: ' + ${client.getGender()}">Gender</span>&emsp;
+                            <span th:text="'Bloodtype: ' + ${client.getBloodtype()}">Bloodtype</span>&emsp;
+                            <span th:text="'Rezus: ' + ${client.getRezus()}">Rezus</span>
+                        </p>
+                        <p class="mt-1">
+                            <span th:text="'Height: ' + ${client.getHeight() + ' cm'}">Height</span>&emsp;
+                            <span th:text="'Weight: ' + ${client.getWeight() + ' kg'}">Weight</span>&emsp;
+                        </p>
+                        <p class="mt-1">
+                            <span th:text="'Address: ' + ${client.getAddress()}">Address</span>
+                        </p>
+                        <p class="mt-1">
+                            <span th:text="'Arrived on: ' + ${reservation.getArrivedString}">Arrived on:</span>&emsp;
+                            <span th:text="'Moved out: ' + ${reservation.getMoved_outString}">Moved out: </span>
+                        </p>
+                        <p class="mt-1">
+                            <span th:text="'My room: ' + ${reservation.getRoomID()}">My room:</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+
+</body>
+</html>
