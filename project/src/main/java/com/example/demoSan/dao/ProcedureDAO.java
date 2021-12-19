@@ -55,6 +55,15 @@ public class ProcedureDAO {
                 parameters,
                 new ProcedureMapper());
     }
+    public static List<Procedure> restProcedures(int id){
+        String SQL = "SELECT * FROM procedures WHERE ProcedureID NOT IN (SELECT ProcedureID FROM purchase WHERE ClientID=:id " +
+                "AND procedure_taken=0)";
+        Map parameters = new HashMap();
+        parameters.put("id", id);
+        return namedParameterJdbcTemplate.query(SQL,
+                parameters,
+                new ProcedureMapper());
+    }
 
     public static List<Procedure> boughtProcedures(int id){
         String SQL = "SELECT * FROM procedures WHERE ProcedureID IN (SELECT ProcedureID FROM purchase_worker WHERE WorkerID=:id " +
@@ -77,7 +86,7 @@ public class ProcedureDAO {
                 new ProcedureMapper());
     }
 
-    public static List<Procedure> restProcedures(int id){
+    public static List<Procedure> restProceduresW(int id){
         String SQL = "SELECT * FROM procedures WHERE ProcedureID NOT IN (SELECT ProcedureID FROM purchase_worker WHERE WorkerID=:id " +
                 "AND procedure_taken=0)";
         Map parameters = new HashMap();

@@ -116,6 +116,7 @@ public class TreatmentPurchaseDAO {
             parameters.replace("procedureID", i);
             treatments.add(jdbcTemplate.queryForObject(SQL, new Object[]{i, clientId, i}, new TreatmentWithNameMapper()));
         }
+
         return treatments;
     }
 }

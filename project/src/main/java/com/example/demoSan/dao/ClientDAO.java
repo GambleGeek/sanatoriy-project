@@ -22,7 +22,7 @@ public class ClientDAO {
     }
 
     public static List<Client> clientList(){
-        return jdbcTemplate.query("SELECT * FROM client", new ClientMapper());
+        return jdbcTemplate.query("SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)` FROM `client` INNER JOIN aigerim3 ON IDclient = ClientID\n", new ClientWithProcedureNumberMapper());
     }
 
     public static Client showClient(int id){
@@ -50,23 +50,14 @@ public class ClientDAO {
                 new ClientMapper());
     }
 
-    public static List getClientWithMaxTreatment(){
-        List valueOfMaxProcedure = jdbcTemplate.queryForList("SELECT ClientID, COUNT(ProcedureID)\n" +
-                        "FROM treatment\n" +
-                        "GROUP BY ClientID\n" +
-                        "order by COUNT(ProcedureID) desc LIMIT 1;",
-                        Integer.class);
-        return valueOfMaxProcedure;
+    public static Client getClientWithMaxTreatment(){
+        return jdbcTemplate.query("SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)` " +
+                "FROM `client` INNER JOIN aigerim3 ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` desc LIMIT 1",
+                new ClientWithProcedureNumberMapper()).stream().findAny().orElse(null);
     }
-
-    public static int getProcedureByClient(int clientID){
-        List valueOfProcedure = jdbcTemplate.query("SELECT ClientID, COUNT(ProcedureID)\n" +
-                        "                        FROM treatment\n" +
-                        "                        GROUP BY ClientID\n" +
-                        "                        order by ClientID",
-                new TreatmentMapper());
-
-        return valueOfProcedure.size();
+    public static Client getClientWithMinTreatment() {
+        return jdbcTemplate.query("    SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)`" +
+                        "FROM `client` INNER JOIN aigerim3 ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` asc LIMIT 1\n",
+                    new ClientWithProcedureNumberMapper()).stream().findAny().orElse(null);
     }
-
 }

@@ -3,82 +3,72 @@ package com.example.demoSan.controllers;
 import com.example.demoSan.dao.*;
 import com.example.demoSan.models.PurchaseWorker;
 import com.example.demoSan.models.Treatment;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.example.demoSan.security.IUserId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @Controller
 @RequestMapping("/assistant")
 public class AssistantController {
 
-    // список всех рабочих
-    @GetMapping("/")
-    public String list(Model model){
-        model.addAttribute("workers", WorkerDAO.workersList());
-        return "assistant/workerslist";
-    }
+    @Autowired
+    private IUserId userId;
 
     // страница аккаунта
-    @GetMapping("/{id}")
-    public String showWorker(@PathVariable("id") int WorkerId,
-                             Model model){
-        model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
-        model.addAttribute("myProcedures", ProcedureDAO.boughtProcedures(WorkerId));
-        model.addAttribute("workerId", WorkerId);
+    @GetMapping("")
+    public String showWorker(Model model){
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+        model.addAttribute("myProcedures", ProcedureDAO.boughtProcedures(userId.get()));
+        model.addAttribute("workerId", userId.get());
         return "assistant/workershow";
     }
 
     // список всех процедур
-    @GetMapping("/{id}/allprocedures")
-    public String allProcedures(@PathVariable("id") int WorkerId,
-                                Model model){
-        model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
-        model.addAttribute("myProcedures", ProcedureDAO.boughtProcedures(WorkerId));
-        model.addAttribute("restProcedures", ProcedureDAO.restProcedures(WorkerId));
-        model.addAttribute("workerId", WorkerId);
+    @GetMapping("/allprocedures")
+    public String allProcedures(Model model){
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+        model.addAttribute("myProcedures", ProcedureDAO.boughtProcedures(userId.get()));
+        model.addAttribute("restProcedures", ProcedureDAO.restProceduresW(userId.get()));
+        model.addAttribute("workerId", userId.get());
         return "assistant/procedures";
     }
 
     // поиск процедуры
-    @PostMapping("/{id}/findprocedure")
+    @PostMapping("/findprocedure")
     public String findProcedure(@RequestParam String name,
-                                @PathVariable("id") int WorkerId,
                                 Model model){
         if (ProcedureDAO.findProcedureByName(name) != null) {
-            model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
-            model.addAttribute("myProcedures", ProcedureDAO.boughtProcedure(WorkerId, ProcedureDAO.findProcedureByName(name).getId()));
-            model.addAttribute("restProcedures", ProcedureDAO.restProcedure(WorkerId, ProcedureDAO.findProcedureByName(name).getId()));
-            model.addAttribute("workerId", WorkerId);
+            model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+            model.addAttribute("myProcedures", ProcedureDAO.boughtProcedure(userId.get(), ProcedureDAO.findProcedureByName(name).getId()));
+            model.addAttribute("restProcedures", ProcedureDAO.restProcedure(userId.get(), ProcedureDAO.findProcedureByName(name).getId()));
+            model.addAttribute("workerId", userId.get());
             return "assistant/findprocedure";
         }
-        return "redirect:/assistant/" + WorkerId + "/allprocedures";
+        return "redirect:/assistant/" + userId.get() + "/allprocedures";
     }
 
     // вывод определенной процедуры
-    @GetMapping("/{id}/allprocedures/{ProcedureId}")
-    public String showProcedure(@PathVariable("id") int WorkerId,
-                                @PathVariable("ProcedureId") int ProcedureId,
+    @GetMapping("/allprocedures/{ProcedureId}")
+    public String showProcedure(@PathVariable("ProcedureId") int ProcedureId,
                                 Model model){
-        model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         model.addAttribute("procedure", ProcedureDAO.showProcedure(ProcedureId));
         model.addAttribute("clients", ClientDAO.getClientByProcedure(ProcedureId));
         model.addAttribute("numberOfClients", ClientDAO.getClientByProcedure(ProcedureId).size());
 
-        model.addAttribute("workerId", WorkerId);
+        model.addAttribute("workerId", userId.get());
         return "assistant/showprocedure";
     }
 
     // подтверждение покупки процедуры
-    @GetMapping("/{id}/allprocedures/add{ProcedureId}")
+    @GetMapping("/allprocedures/add{ProcedureId}")
     public String addProcedure(Model model,
-                               @PathVariable("id") int WorkerId,
                                @PathVariable("ProcedureId") int ProcedureId){
         // данные о сотруднике для отображения его имени
-        model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         // данные о процедуре для отображения названия
         model.addAttribute("procedure", ProcedureDAO.showProcedure(ProcedureId));
         return "assistant/addprocedure";
@@ -86,10 +76,9 @@ public class AssistantController {
 
     // ПОСТ-запрос для сохранения покупки
     // с помощью ModelAttribute получаем данные для сохранения покупки в БД
-    @PostMapping("/{id}/allprocedures")
+    @PostMapping("/allprocedures")
     public String savePurchase(@ModelAttribute("procedureId") int ProcedureID,
                                @ModelAttribute("workerId") int WorkerID,
-                               @PathVariable("id") int id,
                                BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return "procedurelist";
@@ -97,11 +86,11 @@ public class AssistantController {
         PurchaseWorker p = new PurchaseWorker(WorkerID, ProcedureID);
         TreatmentPurchaseDAO.addPurchaseW(p);
         // перенаправление на чек. (отправит на чек последней покупки)
-        return "redirect:/assistant/"+ id +"/check" + TreatmentPurchaseDAO.showLastPurchaseW().getPurchaseID();
+        return "redirect:/assistant/"+ userId.get() +"/check" + TreatmentPurchaseDAO.showLastPurchaseW().getPurchaseID();
     }
 
     // отображение чека с покупки
-    @GetMapping("/{id}/check{checkN}")
+    @GetMapping("/check{checkN}")
     public String showCheck(@PathVariable("checkN") int PurchaseId,
                             Model model){
         // создаём объект Покупки, чтобы извлечь ID процедуры и клиента
@@ -113,50 +102,46 @@ public class AssistantController {
     }
 
     // список всех пациентов
-    @GetMapping("/{id}/allclients")
-    public String allclients(@PathVariable("id") int WorkerId,
-                             Model model){
-        model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
+    @GetMapping("/allclients")
+    public String allclients(Model model){
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         model.addAttribute("allClients", ClientDAO.clientList());
-        model.addAttribute("workerId", WorkerId);
+        model.addAttribute("workerId", userId.get());
         model.addAttribute("valueOfProc", ClientDAO.getClientWithMaxTreatment());
 
         return "assistant/clientlist";
     }
 
     // поиск пациента
-    @PostMapping("/{id}/findclient")
+    @PostMapping("/findclient")
     public String findClient(@RequestParam String name,
-                             @PathVariable("id") int WorkerId,
                              Model model){
         if (ClientDAO.findClientByName(name) != null) {
-            model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
+            model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
             model.addAttribute("client", ClientDAO.showClient(ClientDAO.findClientByName(name).getId()));
-            model.addAttribute("workerId", WorkerId);
+            model.addAttribute("workerId", userId.get());
             return "assistant/findclient";
         }
-        return "redirect:/assistant/" + WorkerId + "/allclients";
+        return "redirect:/assistant/" + userId.get() + "/allclients";
     }
 
     // вывод определенного пациента
-    @GetMapping("/{id}/allclients/{ClientId}")
-    public String showClient(@PathVariable("id") int WorkerId,
-                             @PathVariable("ClientId") int ClientId,
+    @GetMapping("/allclients/{ClientId}")
+    public String showClient(@PathVariable("ClientId") int ClientId,
                              Model model){
-        model.addAttribute("worker", WorkerDAO.showWorker(WorkerId));
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         model.addAttribute("client", ClientDAO.showClient(ClientId));
         model.addAttribute("reservation", ClientDAO.showReservation(ClientId));
         model.addAttribute("myProcedures", TreatmentPurchaseDAO.showLastTreatments(ClientId));
 //        model.addAttribute("myProcedures", ProcedureDAO.myProcedures(ClientId));
         model.addAttribute("boughtProcedures", ProcedureDAO.clientBoughtProcedures(ClientId));
-        model.addAttribute("workerId", WorkerId);
+        model.addAttribute("workerId", userId.get());
         return "assistant/showclient";
     }
 
     // отметить процедуру как посещенную и добавить в таблицу treatment
-    @PostMapping("/{id}/allclients/{ClientId}")
-    public String setProcedureAsVisited(@PathVariable("id") int WorkerId,
-                               @ModelAttribute("procedureId") int procedureID,
+    @PostMapping("/allclients/{ClientId}")
+    public String setProcedureAsVisited(@ModelAttribute("procedureId") int procedureID,
                                @ModelAttribute("clientId") int clientID,
                                BindingResult bindingResult){
         if(bindingResult.hasErrors())
@@ -164,7 +149,7 @@ public class AssistantController {
         ProcedureDAO.setProcedureAsVisited(procedureID,clientID);
         Treatment t = new Treatment(clientID, procedureID);
         TreatmentPurchaseDAO.addTreatment(t);
-            return "redirect:/assistant/"+ WorkerId +"/allclients";
+            return "redirect:/assistant/"+ userId.get() +"/allclients";
     }
 
     // расписание процедур

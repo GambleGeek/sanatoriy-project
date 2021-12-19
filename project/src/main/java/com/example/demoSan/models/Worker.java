@@ -5,7 +5,7 @@ public class Worker {
     private String name;
     private String position;
     private String login;
-    private int password;
+    private String password;
 
     public int getWorkerId() {
         return workerId;
@@ -39,11 +39,11 @@ public class Worker {
         this.login = login;
     }
 
-    public int getPassword() {
+    public String  getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String  password) {
         this.password = password;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
 
-    private final UserDao userDao;
+    private static UserDao userDao = null;
 
     @Autowired
     public UserService(@Qualifier("database") UserDao userDao){
@@ -23,5 +23,13 @@ public class UserService implements UserDetailsService {
                 .selectApplicationUserByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(String.format("Username %s not found", username)));
+    }
+
+    public static int getId(String username) {
+        User user = userDao
+                .selectApplicationUserByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(String.format("Username %s not found", username)));
+        return user.getId();
     }
 }
