@@ -33,7 +33,7 @@ public class AssistantController {
         model.addAttribute("myProcedures", ProcedureDAO.boughtProcedures(userId.get()));
         model.addAttribute("restProcedures", ProcedureDAO.restProceduresW(userId.get()));
         model.addAttribute("workerId", userId.get());
-        return "assistant/procedures";
+        return "assistant/procedurelist";
     }
 
     // поиск процедуры
@@ -86,7 +86,7 @@ public class AssistantController {
         PurchaseWorker p = new PurchaseWorker(WorkerID, ProcedureID);
         TreatmentPurchaseDAO.addPurchaseW(p);
         // перенаправление на чек. (отправит на чек последней покупки)
-        return "redirect:/assistant/"+ userId.get() +"/check" + TreatmentPurchaseDAO.showLastPurchaseW().getPurchaseID();
+        return "redirect:/assistant/check" + TreatmentPurchaseDAO.showLastPurchaseW().getPurchaseID();
     }
 
     // отображение чека с покупки
@@ -122,7 +122,7 @@ public class AssistantController {
             model.addAttribute("workerId", userId.get());
             return "assistant/findclient";
         }
-        return "redirect:/assistant/" + userId.get() + "/allclients";
+        return "redirect:/assistant/allclients";
     }
 
     // вывод определенного пациента
@@ -149,7 +149,7 @@ public class AssistantController {
         ProcedureDAO.setProcedureAsVisited(procedureID,clientID);
         Treatment t = new Treatment(clientID, procedureID);
         TreatmentPurchaseDAO.addTreatment(t);
-            return "redirect:/assistant/"+ userId.get() +"/allclients";
+            return "redirect:/assistant/allclients";
     }
 
     // расписание процедур

@@ -1,5 +1,9 @@
 package com.example.demoSan.models;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,8 +12,15 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Procedure {
-    private int id, price, schedule;
+    private int id, schedule;
+
+    @Min(value=0, message = "Minimum value of price should be greater than 0")
+    private int price;
+
+    @NotEmpty(message="Name should not be empty")
+    @Size(min = 5, message = "Size should be greater than 5 symbols")
     private String name;
+
     private Time start_at, end_at;
     private String start_atString, end_atString;
     final String pattern = "HH:mm";

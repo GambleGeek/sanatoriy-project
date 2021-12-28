@@ -80,42 +80,42 @@
     </div>
     <ul class="nav_list">
         <li>
-            <a th:href="@{/manager/{id}(id=${worker.getWorkerId()})}">
+            <a href="/manager/">
                 <i class='bx bxs-home'></i>
                 <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allclients(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allclients}">
                 <i class='bx bx-user'></i>
                 <span class="links_name">Client List</span>
             </a>
             <span class="tooltip">Client List</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allprocedures(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allprocedures}">
                 <i class='bx bx-plus-medical' ></i>
                 <span class="links_name">Procedure List</span>
             </a>
             <span class="tooltip">Procedure List</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allclients/max(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allclients/max}">
                 <i class='bx bx-chevron-up' ></i>
                 <span class="links_name">Max Visited Client</span>
             </a>
             <span class="tooltip">MAX</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allclients/min(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allclients/min}">
                 <i class='bx bx-chevron-down' ></i>
                 <span class="links_name">Min Visited Client</span>
             </a>
             <span class="tooltip">MIN</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/schedule(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/schedule}">
                 <i class='bx bx-time'></i>
                 <span class="links_name">Schedule</span>
             </a>
@@ -226,7 +226,7 @@
                                     <p th:text="'Visited Procedures: ' + ${client.getProcedureNumber()}">Visited Procedures</p>
                                 </div>
                                 <div class="d-flex mt-2">
-                                    <a th:href="@{'/manager/' + ${workerId} + '/allclients/{id}'(id=${client.getId()})}" class="btn btn-primary active mr-1" role="button" aria-pressed="true">Details</a>
+                                    <a th:href="@{'/manager/allclients/{id}'(id=${client.getId()})}" class="btn btn-primary active mr-1" role="button" aria-pressed="true">Details</a>
                                 </div>
                             </div>
                         </div>

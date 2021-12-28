@@ -82,42 +82,42 @@
     </div>
     <ul class="nav_list">
         <li>
-            <a th:href="@{/manager/{id}(id=${worker.getWorkerId()})}">
+            <a href="/manager/">
                 <i class='bx bxs-home'></i>
                 <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allclients(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allclients}">
                 <i class='bx bx-user'></i>
                 <span class="links_name">Client List</span>
             </a>
             <span class="tooltip">Client List</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allprocedures(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allprocedures}">
                 <i class='bx bx-plus-medical' ></i>
                 <span class="links_name">Procedure List</span>
             </a>
             <span class="tooltip">Procedure List</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allclients/max(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allclients/max}">
                 <i class='bx bx-chevron-up' ></i>
                 <span class="links_name">Max Visited Client</span>
             </a>
             <span class="tooltip">MAX</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/allclients/min(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/allclients/min}">
                 <i class='bx bx-chevron-down' ></i>
                 <span class="links_name">Min Visited Client</span>
             </a>
             <span class="tooltip">MIN</span>
         </li>
         <li>
-            <a th:href="@{/manager/{id}/schedule(id=${worker.getWorkerId()})}">
+            <a th:href="@{/manager/schedule}">
                 <i class='bx bx-time'></i>
                 <span class="links_name">Schedule</span>
             </a>
@@ -217,7 +217,7 @@
                                     </div>
                                     <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
                                     <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
-                                    <a th:href="@{'/manager/' + ${workerId} + '/allprocedures/' + ${procedureId} + '/edit'}">Edit</a>
+                                    <a th:href="@{'/manager/allprocedures/' + ${procedureId} + '/edit'}">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,7 @@
                                     <div class="card mx-3 mb-3" style="width: 18rem;">
                                         <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${client.getId()})}">
                                         <div class="card-body text-center">
-                                            <a th:href="@{'/manager/' + ${workerId} + '/allclients/{id}'(id=${client.getId()})}" style="text-decoration: none;">
+                                            <a th:href="@{'/manager/allclients/{id}'(id=${client.getId()})}" style="text-decoration: none;">
                                                 <h5 class="card-text" th:text="${client.getName()}">Client name</h5>
                                             </a>
                                         </div>

@@ -8,8 +8,8 @@
 </head>
 <body>
 <div class="container">
-    <form th:action="@{/manager/111/allprocedures/124}" th:method="POST" th:object="${procedure}">
-        <input type="hidden" id="procedureId" name="procedureId" th:field="*{id}">
+    <form th:action="@{'/manager/allprocedures/{id}'(id=${procedure.getId()})}" th:method="POST" th:object="${procedure}">
+        <input type="hidden" id="id" name="id" th:field="*{id}">
         <label for="name">Enter procedure's name: </label>
         <input type="text" id="name" name="name" th:field="*{name}" placeholder="Enter procedure's name" class="form-control mt-2">
         <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>

@@ -25,63 +25,64 @@
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo_content">
-            <div class="logo">
-                <i class="bx">
-                    <img th:src="@{/image/logo.png}"
-                    style="height: 50px; width: 50px;">
-                </i>
-                <div class="logo_name">San</div>
-            </div>
-            <i class="bx bx-menu" id="btn"></i>
+<div class="sidebar">
+    <div class="logo_content">
+        <div class="logo">
+            <i class="bx">
+                <img th:src="@{/image/logo.png}"
+                     style="height: 50px; width: 50px;">
+            </i>
+            <div class="logo_name">San</div>
         </div>
-        <ul class="nav_list">
-            <li>
-                <a th:href="@{/assistant/{id}(id=${worker.getWorkerId()})}">
-                    <i class='bx bxs-home'></i>
-                    <span class="links_name">Home</span>
-                </a>
-                <span class="tooltip">Home</span>
-            </li>
-            <li>
-                <a th:href="@{/assistant/{id}/allprocedures(id=${worker.getWorkerId()})}">
-                    <i class='bx bx-plus-medical'></i>
-                    <span class="links_name">Procedure List</span>
-                </a>
-                <span class="tooltip">Procedure List</span>
-            </li>
-            <li>
-                <a th:href="@{/assistant/{id}(id=${worker.getWorkerId()})}">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Client List</span>
-                </a>
-                <span class="tooltip">Client List</span>
-            </li>
-            <li>
-                <a th:href="@{/assistant/schedule}">
-                    <i class='bx bx-time'></i>
-                    <span class="links_name">Schedule</span>
-                </a>
-                <span class="tooltip">Schedule</span>
-            </li>
-        </ul>
-        <div class="profile_content">
-            <div class="profile">
-                <div class="profile_details">
-                    <img src="images/violet.jpg">
-                    <div class="name_job">
-                        <div class="name">Budaychieva Aigerim</div>
-                        <div class="job">Back-End Developer</div>
-                    </div>
+        <i class="bx bx-menu" id="btn"></i>
+    </div>
+    <ul class="nav_list">
+        <li>
+            <a th:href="@{/assistant/}">
+                <i class='bx bxs-home'></i>
+                <span class="links_name">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+        </li>
+        <li>
+            <a th:href="@{/assistant/allclients}">
+                <i class='bx bx-user'></i>
+                <span class="links_name">Client List</span>
+            </a>
+            <span class="tooltip">Client List</span>
+        </li>
+        <li>
+            <a th:href="@{/assistant/allprocedures}">
+                <i class='bx bx-plus-medical' ></i>
+                <span class="links_name">Procedure List</span>
+            </a>
+            <span class="tooltip">Procedure List</span>
+        </li>
+        <li>
+            <a th:href="@{/assistant/schedule}">
+                <i class='bx bx-time'></i>
+                <span class="links_name">Schedule</span>
+            </a>
+            <span class="tooltip"
+                  style="z-index: 1000;">Schedule</span>
+        </li>
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+                <img th:src="@{/image/{id}.jpg(id=${worker.getWorkerId()})}">
+                <div class="name_job">
+                    <div class="name" th:text="${worker.getName()}">name</div>
+                    <div class="job" th:text="${worker.getPosition()}">pos</div>
                 </div>
-                <!-- ссылка -->
-                <a href="/logout">
-                    <i class="bx bx-log-out text-white" id="log_out"></i>
-                </a>
             </div>
+            <!-- ссылка -->
+            <a href="/logout">
+                <i class="bx bx-log-out text-white" id="log_out"></i>
+            </a>
         </div>
     </div>
+</div>
 
     <div class="home_content">
         <div class="col-md-12 mt-3 container">
@@ -146,7 +147,7 @@
                                         <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
                                         <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
                                         <div class="d-flex flex-column mt-2">
-                                            <a th:href="@{'/assistant/' + ${workerId} + '/allprocedures/{id}'(id=${procedure.getId()})}" class="btn btn-primary btn-sm" ole="button" aria-pressed="true">Details</a>
+                                            <a th:href="@{'/assistant/allprocedures/{id}'(id=${procedure.getId()})}" class="btn btn-primary btn-sm" ole="button" aria-pressed="true">Details</a>
                                             <button class="btn btn-outline-primary btn-sm mt-2 disabled" type="button"
                                                     data-toggle="popover" title="You already bought this procedure!">
                                                 Buy
@@ -177,8 +178,8 @@
                                         <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
                                         <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
                                         <div class="d-flex flex-column mt-2">
-                                            <a th:href="@{'/assistant/' + ${workerId} + '/allprocedures/{id}'(id=${procedure.getId()})}" class="btn btn-primary btn-sm" ole="button" aria-pressed="true">Details</a>
-                                            <form th:action="@{'/assistant/' + ${workerId} + '/allprocedures/add' + ${procedure.getId()}}">
+                                            <a th:href="@{'/assistant/allprocedures/{id}'(id=${procedure.getId()})}" class="btn btn-primary btn-sm" ole="button" aria-pressed="true">Details</a>
+                                            <form th:action="@{'/assistant/allprocedures/add' + ${procedure.getId()}}">
                                                 <input class="btn btn-outline-primary btn-sm mt-2 w-100" type="submit" value="Buy">
                                             </form>
                                         </div>
