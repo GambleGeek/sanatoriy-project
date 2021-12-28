@@ -82,28 +82,28 @@
     </div>
     <ul class="nav_list">
         <li>
-            <a th:href="@{/assistant/{id}(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/}">
                 <i class='bx bxs-home'></i>
                 <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
         </li>
         <li>
-            <a th:href="@{/assistant/{id}/allclients(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/allclients}">
                 <i class='bx bx-user'></i>
                 <span class="links_name">Client List</span>
             </a>
             <span class="tooltip">Client List</span>
         </li>
         <li>
-            <a th:href="@{/assistant/{id}/allprocedures(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/allprocedures}">
                 <i class='bx bx-plus-medical' ></i>
                 <span class="links_name">Procedure List</span>
             </a>
             <span class="tooltip">Procedure List</span>
         </li>
         <li>
-            <a th:href="@{/assistant/{id}/schedule(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/schedule}">
                 <i class='bx bx-time'></i>
                 <span class="links_name">Schedule</span>
             </a>
@@ -229,7 +229,7 @@
                                     <div class="card" style="width: 18rem;">
                                         <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${procedure.getProcedureID()})}">
                                         <div class="card-body text-center">
-                                            <a th:href="@{'/assistant/' + ${workerId} + '/allprocedures/{id}'(id=${procedure.getProcedureID()})}" style="text-decoration: none">
+                                            <a th:href="@{'/assistant/allprocedures/{id}'(id=${procedure.getProcedureID()})}" style="text-decoration: none">
                                                 <h5 class="card-text" th:text="${procedure.getProcedureName()}">Procedure name</h5>
                                             </a>
                                             <!--                                        <h4 class="mr-1 mt-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4>-->
@@ -252,14 +252,14 @@
                                     <div class="card" style="width: 18rem;">
                                         <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${procedure.getId()})}">
                                         <div class="card-body text-center">
-                                            <a th:href="@{'/assistant/' + ${workerId} + '/allprocedures/{id}'(id=${procedure.getId()})}" style="text-decoration: none">
+                                            <a th:href="@{'/assistant/allprocedures/{id}'(id=${procedure.getId()})}" style="text-decoration: none">
                                                 <h5 class="card-text" th:text="${procedure.getName()}">Procedure name</h5>
                                             </a>
                                             <h4 class="mr-1 mt-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4>
                                             <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
                                             <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
 
-                                            <form method="POST" th:action="@{'/assistant/' + ${workerId} + '/allclients/{id}'(id=${client.getId()})}">
+                                            <form method="POST" th:action="@{'/assistant/allclients/{id}'(id=${client.getId()})}">
                                                 <input type="hidden" th:value="${client.getId()}" name="clientId" id="clientId" th:object="${clientId}">
                                                 <input type="hidden" th:value="${procedure.getId()}" name="procedureId" id="procedureId" th:object="${procedureId}">
                                                 <input class="btn btn-success btn-sm px-5" type="submit" value="Match as visited"/>

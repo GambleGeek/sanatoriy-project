@@ -22,7 +22,8 @@ public class ClientDAO {
     }
 
     public static List<Client> clientList(){
-        return jdbcTemplate.query("SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)` FROM `client` INNER JOIN aigerim3 ON IDclient = ClientID\n", new ClientWithProcedureNumberMapper());
+        return jdbcTemplate.query("SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)` FROM `client` INNER JOIN `clientsWithProcedure` ON IDclient = ClientID\n",
+                new ClientWithProcedureNumberMapper());
     }
 
     public static Client showClient(int id){
@@ -52,12 +53,12 @@ public class ClientDAO {
 
     public static Client getClientWithMaxTreatment(){
         return jdbcTemplate.query("SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)` " +
-                "FROM `client` INNER JOIN aigerim3 ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` desc LIMIT 1",
+                "FROM `client` INNER JOIN `clientsWithProcedure` ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` desc LIMIT 1",
                 new ClientWithProcedureNumberMapper()).stream().findAny().orElse(null);
     }
     public static Client getClientWithMinTreatment() {
         return jdbcTemplate.query("    SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)`" +
-                        "FROM `client` INNER JOIN aigerim3 ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` asc LIMIT 1\n",
+                        "FROM `client` INNER JOIN `clientsWithProcedure` ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` asc LIMIT 1\n",
                     new ClientWithProcedureNumberMapper()).stream().findAny().orElse(null);
     }
 }

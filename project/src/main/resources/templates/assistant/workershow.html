@@ -82,28 +82,28 @@
     </div>
     <ul class="nav_list">
         <li>
-            <a th:href="@{/assistant/{id}(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/}">
                 <i class='bx bxs-home'></i>
                 <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
         </li>
         <li>
-            <a th:href="@{/assistant/{id}/allclients(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/allclients}">
                 <i class='bx bx-user'></i>
                 <span class="links_name">Client List</span>
             </a>
             <span class="tooltip">Client List</span>
         </li>
         <li>
-            <a th:href="@{/assistant/{id}/allprocedures(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/allprocedures}">
                 <i class='bx bx-plus-medical' ></i>
                 <span class="links_name">Procedure List</span>
             </a>
             <span class="tooltip">Procedure List</span>
         </li>
         <li>
-            <a th:href="@{/assistant/{id}/schedule(id=${worker.getWorkerId()})}">
+            <a th:href="@{/assistant/schedule}">
                 <i class='bx bx-time'></i>
                 <span class="links_name">Schedule</span>
             </a>
@@ -187,7 +187,7 @@
                                 <div class="card" style="width: 18rem;">
                                     <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${procedure.getId()})}">
                                     <div class="card-body text-center">
-                                        <a th:href="@{'/assistant/' + ${workerId} + '/allprocedures/{id}'(id=${procedure.getId()})}" style="text-decoration: none">
+                                        <a th:href="@{'/assistant/allprocedures/{id}'(id=${procedure.getId()})}" style="text-decoration: none">
                                             <h5 class="card-text" th:text="${procedure.getName()}">Procedure name</h5>
                                         </a>
                                     </div>

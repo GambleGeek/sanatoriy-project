@@ -51,6 +51,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .passwordParameter("password")
                     .usernameParameter("username")
                     .successHandler(loginSuccessHandler)
+                    .failureUrl("/login-error").permitAll()
                 .and()
                 .logout()
                     .logoutUrl("/logout")
@@ -58,7 +59,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID", "Idea-de46a380")
-                    .logoutSuccessUrl("/san/");
+                    .logoutSuccessUrl("/");
     }
 
     @Override

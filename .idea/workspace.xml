@@ -62,17 +62,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/project/src/main/resources/templates/assistant" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/project" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project" />
       <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\resources\templates\assistant" />
       <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\java\com\example\demoSan\dao" />
       <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\java\com\example\demoSan\controllers" />
       <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\resources\static\css" />
-      <recent name="D:\my\studying\уник\3 семестр\курсовая\sanatoriy-project\project\src\main\resources\templates" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -92,6 +92,7 @@
       <workItem from="1639843749888" duration="666000" />
       <workItem from="1639845863597" duration="2827000" />
       <workItem from="1639910005861" duration="396000" />
+      <workItem from="1639940283059" duration="404000" />
     </task>
     <servers />
   </component>
