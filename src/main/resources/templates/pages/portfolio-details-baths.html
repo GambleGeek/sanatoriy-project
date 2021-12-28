@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Baths</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+  <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+
+<body>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+        <div class="close">
+          <a href="/#procedure"><i class="bi bi-x-circle text-dark h1"></i></a>
+        </div>
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img th:src="@{/image/130.jpg}" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img th:src="@{/image/130-1.jpg}" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Procedure information</h3>
+              <ul>
+                <li><strong>Name</strong>: <span class="text-primary">Baths</span></li>
+                <li><strong>Time</strong>: <span class="text-primary">19:00 - 21:00</span></li>
+                <li><strong>Price</strong>: <span class="text-primary">100</span></li>
+                <li><strong>Schedule</strong>: <span class="text-primary">Monday, Teusday, Wednesday, Thursday, Friday, Saturday, Sunday</span></li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>Procedure details.</h2>
+              <p>
+                Ein Kontrastbad ist eine Therapieform, bei der in warmem und kaltem Wasser gebadet wird. Sie wechseln die heißen und 
+                kalten Bäder in Sitzungen ab. Diese Technik kann helfen, die Blutzirkulation im ganzen Körper zu verbessern
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+  <script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
+  <script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+
+</body>
+
+</html>

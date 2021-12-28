@@ -3,9 +3,14 @@ package com.example.demoSan.models;
 import java.util.Date;
 
 public class Client {
-    private int id, height, weight, bloodtype;
+    private int id, height, weight, bloodtype, procedureNumber;
     private String name, address, gender, rezus, illness;
     private Date birthdate;
+
+    public Client(int id, int procedureNumber) {
+        this.id = id;
+        this.procedureNumber = procedureNumber;
+    }
 
     public Client(){}
 
@@ -22,6 +27,15 @@ public class Client {
         this.rezus = rezus;
         this.illness = illness;
         this.birthdate = birthdate;
+    }
+
+
+    public int getProcedureNumber() {
+        return procedureNumber;
+    }
+
+    public void setProcedureNumber(int procedureNumber) {
+        this.procedureNumber = procedureNumber;
     }
 
     public int getId() {

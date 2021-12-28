@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style2.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <title>Worker</title>
+</head>
+<body>
+
+<style>
+
+    body{overflow-y: scroll;}
+
+    .widget-left
+    {
+        padding-right: 1px;
+    }
+
+    .sidebar ul li i
+    {
+        height: 50px;
+        min-width: 30px;
+        border-radius: 12px;
+        line-height: 50px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    ol, ul
+    {
+        padding-left: 10%;
+    }
+    .sidebar ul li
+    {
+        position: relative;
+        height: 55px;
+        width: 70%;
+        margin: 0 0 0 5px;
+        list-style: none;
+        line-height: 20px;
+    }
+    .sidebar.active ul li
+    {
+        width: 100%;
+    }
+
+    .sidebar.active #btn
+    {
+        left: 90%;
+        z-index: 10;
+    }
+
+    .home_content ul li
+    {
+        margin-right: 15px;
+    }
+
+    .home_content ul li i
+    {
+        margin-bottom: 10px;
+        margin-right: 2px;
+    }
+</style>
+
+<div class="sidebar">
+    <div class="logo_content">
+        <div class="logo">
+            <i class="bx">
+                <img th:src="@{/image/logo.png}"
+                     style="height: 50px; width: 50px;">
+            </i>
+            <div class="logo_name">San</div>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+    </div>
+    <ul class="nav_list">
+        <li>
+            <a href="/manager/">
+                <i class='bx bxs-home'></i>
+                <span class="links_name">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+        </li>
+        <li>
+            <a th:href="@{/manager/allclients}">
+                <i class='bx bx-user'></i>
+                <span class="links_name">Client List</span>
+            </a>
+            <span class="tooltip">Client List</span>
+        </li>
+        <li>
+            <a th:href="@{/manager/allprocedures}">
+                <i class='bx bx-plus-medical' ></i>
+                <span class="links_name">Procedure List</span>
+            </a>
+            <span class="tooltip">Procedure List</span>
+        </li>
+        <li>
+            <a th:href="@{/manager/allclients/max}">
+                <i class='bx bx-chevron-up' ></i>
+                <span class="links_name">Max Visited Client</span>
+            </a>
+            <span class="tooltip">MAX</span>
+        </li>
+        <li>
+            <a th:href="@{/manager/allclients/min}">
+                <i class='bx bx-chevron-down' ></i>
+                <span class="links_name">Min Visited Client</span>
+            </a>
+            <span class="tooltip">MIN</span>
+        </li>
+        <li>
+            <a th:href="@{/manager/schedule}">
+                <i class='bx bx-time'></i>
+                <span class="links_name">Schedule</span>
+            </a>
+            <span class="tooltip"
+                  style="z-index: 1000;">Schedule</span>
+        </li>
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+                <img th:src="@{/image/{id}.jpg(id=${worker.getWorkerId()})}">
+                <div class="name_job">
+                    <div class="name" th:text="${worker.getName()}">name</div>
+                    <div class="job" th:text="${worker.getPosition()}">pos</div>
+                </div>
+            </div>
+            <!-- ссылка -->
+            <a href="/logout">
+                <i class="bx bx-log-out text-white" id="log_out"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="home_content"
+     style="left: 75px;">
+    <div class="">
+        <div class="rounded-top text-white d-flex" style="background-color: #000; height:200px;">
+            <div class="ms-4 d-flex flex-column" style="width: 150px; margin-top: 72px">
+                <img th:src="@{/image/{id}.jpg(id=${worker.getWorkerId()})}" alt="Worker Image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px;">
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+                <h5 th:text="${worker.getName()}">Adis Kerimov</h5>
+                <p th:text="${worker.getPosition()}">Manager</p>
+            </div>
+        </div>
+        <div class="p-4 text-black">
+            <div class="d-flex">
+                <ul style="list-style: none;">
+                    <li style="display: inline;">
+                        <i class='bx bxl-instagram'></i>
+                        <p1>@yatoro_reference</p1>
+                    </li>
+                    <li style="display: inline;">
+                        <i class='bx bxl-telegram'></i>
+                        <p1> @requimeofsoulzxc</p1>
+                    </li>
+                    <li style="display: inline;">
+                        <i class='bx bxl-facebook'></i>
+                        <p1> @requimeofsoulzxc</p1>
+                    </li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-center">
+                <!--Основной контент-->
+                <div class="border px-3"
+                     style="margin-right: 50px;
+                height: 30%;">
+                    <h5 class="mt-2 mb-4 fw-bold text-center">Погода в Бишкеке</h5>
+                    <div id="_MI_66984b5d9a980bd88b936ac37ca9bdf2" class="widget"
+                         style="margin-left: 3px;">
+                        <a href="https://ru.meteotrend.com/">Прогноз погоды</a></div>
+
+                    <hr>
+
+                    <h5 class="mt-2 b-2 text-center">О себе</h5>
+                    <p>Мои Контакты: <span style="margin-left: 50px;">+996 777 777 777</span></p>
+
+                </div>
+
+                <!--    change-->
+                <!--Основной контент-->
+                <div class="col-md-9 rounded pb-3 d-flex justify-content-center">
+
+                    <div class="receipt-content">
+                        <div class="container bootstrap snippets bootdey">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="invoice-wrapper">
+                                        <div class="intro">
+                                            Hi <strong th:text="${worker.getName()}">John McClane</strong>,
+                                            <br>
+                                            This is the receipt for a payment of <strong th:text="${procedure.getName()}">Procedure</strong>
+                                        </div>
+
+                                        <div class="payment-info">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <span>Payment No.</span>
+                                                    <strong th:text="${check.getPurchaseID()}">434334343</strong>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    <span>Payment Date</span>
+                                                    <strong th:text="${check.getDate() + ' - ' + check.getTime()}">Jul 09, 2014 - 12:20 pm</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="payment-details">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <span>Client</span>
+                                                    <strong th:text="${worker.getName()}">John McClane</strong>
+                                                    <p th:text="${worker.getPosition()}">Position</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    <span>Payment To</span>
+                                                    <strong>
+                                                        san
+                                                    </strong>
+                                                    <p>
+                                                        Issyk-Kul <br>
+                                                        Kyrgyzstan <br>
+                                                        <a href="#">
+                                                            san@gmail.com
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="line-items">
+                                            <div class="headers clearfix">
+                                                <div class="row">
+                                                    <div class="col-xs-4">Description</div>
+                                                    <div class="col-xs-3">Quantity</div>
+                                                    <div class="col-xs-5 text-right">Amount</div>
+                                                </div>
+                                            </div>
+                                            <div class="items">
+                                                <div class="row item">
+                                                    <div class="col-xs-4 desc">
+                                                        <span th:text="${procedure.getName()}">Procedure</span>
+                                                    </div>
+                                                    <div class="col-xs-3 qty">
+                                                        :
+                                                    </div>
+                                                    <div class="col-xs-5 amount ms-5">
+                                                        <p><b>Old Price:</b> <span th:text="${procedure.getPrice() + ' som'}">Price</span> <span class="text-success"><b>-50% Offer!</b></span></p>
+                                                        <p><b>Discount price:</b> <span th:text="${procedure.getPriceDiscount() + ' som'}">Price</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="total text-right">
+                                                <p class="extra-notes">
+                                                    <strong>Extra Notes</strong>
+                                                    Please check your schedule of procedures to not miss out.
+                                                    Thanks a lot.
+                                                </p>
+                                                <div class="field grand-total" style="float: right">
+                                                    Total <span th:text="${procedure.getPriceDiscount() + ' som'}">$312.00</span>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="print">
+                                                <a href="#" style="text-decoration: none;">
+                                                    <i class="fa fa-print"></i>
+                                                    Print this receipt
+                                                </a>
+                                                <a th:href="@{/manager/allprocedures}" style="text-decoration: none;">
+                                                    <i class="fa fa-print"></i>
+                                                    Close
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let btn = document.querySelector("#btn");
+    let sidebar = document.querySelector(".sidebar");
+    let homeContent = document.querySelector(".home_content");
+    let widget = document.querySelector(".widget")
+
+    btn.onclick = function()
+    {
+        sidebar.classList.toggle("active")
+        homeContent.classList.toggle("home_content_big")
+        widget.classList.toggle("widget-left")
+    }
+
+</script>
+<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'66984b5d9a980bd88b936ac37ca9bdf2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/7206a0560b4352ff43b0b986ccf1c4f88edab7a6.css'],source:'meteotrend'});</script>
+</body>
+
+</html>
+

@@ -2,15 +2,10 @@ package com.example.demoSan.dao;
 
 import com.example.demoSan.models.Client;
 import com.example.demoSan.models.Reserved;
-import com.fasterxml.jackson.databind.util.Named;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.naming.Name;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +22,8 @@ public class ClientDAO {
     }
 
     public static List<Client> clientList(){
-        return jdbcTemplate.query("SELECT * FROM client", new ClientMapper());
+        return jdbcTemplate.query("SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)` FROM `client` INNER JOIN `clientsWithProcedure` ON IDclient = ClientID\n",
+                new ClientWithProcedureNumberMapper());
     }
 
     public static Client showClient(int id){
@@ -55,4 +51,14 @@ public class ClientDAO {
                 new ClientMapper());
     }
 
+    public static Client getClientWithMaxTreatment(){
+        return jdbcTemplate.query("SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)` " +
+                "FROM `client` INNER JOIN `clientsWithProcedure` ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` desc LIMIT 1",
+                new ClientWithProcedureNumberMapper()).stream().findAny().orElse(null);
+    }
+    public static Client getClientWithMinTreatment() {
+        return jdbcTemplate.query("    SELECT IDclient, name, address, birthdate, gender, height, weight, bloodtype, rezus, illness, `COUNT(ProcedureID)`" +
+                        "FROM `client` INNER JOIN `clientsWithProcedure` ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` asc LIMIT 1\n",
+                    new ClientWithProcedureNumberMapper()).stream().findAny().orElse(null);
+    }
 }

@@ -60,6 +60,9 @@ public class TreatmentPurchaseDAO {
     }
 
     public static List<Purchase> showAllPurchases(int id){
+//        String SQL = "SELECT p.Name, p.ProcedureID, t.Date, t.Time, t.TreatmentID\n" +
+//                "FROM procedures p INNER JOIN treatment t\n" +
+//                "WHERE t.ClientID=?";
         return jdbcTemplate.query("SELECT * FROM purchase WHERE ClientID=?", new Object[]{id},
                 new PurchaseMapper());
     }

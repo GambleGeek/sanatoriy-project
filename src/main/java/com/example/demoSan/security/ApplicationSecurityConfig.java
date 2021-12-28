@@ -36,20 +36,22 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/san/**").permitAll()
-                .antMatchers("/manager/*").hasRole("MANAGER")
-                .antMatchers("/assistant/*").hasAnyRole("ASSISTANT", "MANAGER")
-                .antMatchers("/client/*").hasAnyRole("ASSISTANT", "CLIENT", "MANAGER")
+                .antMatchers("/director/**").hasRole("DIRECTOR")
+                .antMatchers("/manager/**").hasAnyRole("MANAGER", "DIRECTOR")
+                .antMatchers("/assistant/**").hasAnyRole("ASSISTANT", "MANAGER", "DIRECTOR")
+                .antMatchers("/client/**").hasAnyRole("ASSISTANT", "CLIENT", "MANAGER", "DIRECTOR")
+                .antMatchers("/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-//                    .loginPage("/san/login").permitAll()
+                    .loginPage("/login").permitAll()
                     .passwordParameter("password")
                     .usernameParameter("username")
                     .successHandler(loginSuccessHandler)
+                    .failureUrl("/login-error").permitAll()
                 .and()
                 .logout()
                     .logoutUrl("/logout")
@@ -57,7 +59,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID", "Idea-de46a380")
-                    .logoutSuccessUrl("/san/");
+                    .logoutSuccessUrl("/");
     }
 
     @Override

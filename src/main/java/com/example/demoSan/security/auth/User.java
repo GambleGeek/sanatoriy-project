@@ -11,6 +11,7 @@ import java.util.Set;
 
 public class User implements UserDetails {
 
+    private int id;
     private String username;
     private String password;
     private Set<? extends GrantedAuthority> grantedAuthorities;
@@ -87,6 +88,14 @@ public class User implements UserDetails {
 
     public void setRole(String role){
         this.role=role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setGrantedAuthorities() {

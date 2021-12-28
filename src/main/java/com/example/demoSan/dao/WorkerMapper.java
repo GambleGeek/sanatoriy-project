@@ -14,9 +14,9 @@ public class WorkerMapper implements RowMapper<Worker> {
 
         worker.setWorkerId(resultSet.getInt("WorkerID"));
         worker.setName(resultSet.getString("Name"));
-        worker.setPosition(resultSet.getString("position"));
+        worker.setPosition(resultSet.getString("Position"));
         worker.setLogin(resultSet.getString("Login"));
-        worker.setPassword(resultSet.getInt("Password"));
+        worker.setPassword(resultSet.getString("Password"));
 
         return worker;
     }

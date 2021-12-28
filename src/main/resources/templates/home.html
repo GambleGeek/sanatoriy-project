@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/mbr-additional.css"> -->
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link th:href="@{/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>San</title>
+</head>
+
+<body>
+  <header id="header" class="fixed-top">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">
+          <img th:src="@{/image/logo.png}" alt="">
+        </a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="active" href="#hero">Home</a></li>
+          <li><a href="#features3-4">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#features2-5">Rooms</a></li>
+          <li><a href="#procedure">Procedures</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-social-links">
+        <a href="/login"><i class='bx bxs-door-open' style="font-size: 28px;"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container d-flex flex-column align-items-center" data-aos="zoom-in" data-aos-delay="100">
+      <h1>SAN</h1>
+      <a href="" class="btn-about">Lorem.</a>
+    </div>
+  </section>
+
+  <section class="about container-fluid" id="features3-4">
+    <div class="row justify-content-center">
+      <div class="image-element col-xl-6">
+        <div class="img-wrap">
+          <img src="https://cdn.discordapp.com/attachments/823229429920694293/924645630066958346/1.jpg">
+        </div>
+      </div>
+      <div class="text-element col-xl-6">
+        <h2 class="pb-4 align-self-start">
+          о нас
+        </h2>
+        <div class="pb-4">
+          <p class="">
+            This HTML5 Hotel Template lies in near Mountfell Airport and uses a free of charge complete Southern morning
+            meal buffet, cost-free flight terminal shuttle services and also guest rooms with free WiFi.
+          </p>
+          <p class="">
+            Visitors can take advantage of the on-site company centre, health and fitness area with cardio and also
+            weight tools, and coin washing facilities with detergent readily available in HTML5 Hotel Template for
+            purchase. Free coffee is offered in the lobby.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services" style="padding: 60px;">
+    <div class="container" data-aos="fade-up"> 
+        <h2 class="pt-5 pb-5">Our features</h2>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box iconbox-blue">
+            <div class="icon">
+              <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="none" stroke-width="0" fill="#f5f5f5"
+                  d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174">
+                </path>
+              </svg>
+              <i class="bx bxl-dribbble"></i>
+            </div>
+            <h4><a href="">Удобство</a></h4>
+            <p>Мы предоставляем автоматизированную информационную систему</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box iconbox-orange ">
+            <div class="icon">
+              <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="none" stroke-width="0" fill="#f5f5f5"
+                  d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426">
+                </path>
+              </svg>
+              <i class="bx bx-file"></i>
+            </div>
+            <h4><a href="">Легкость в использовании</a></h4>
+            <p>Упрощенная работа между персоналом и клиентами</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box iconbox-pink">
+            <div class="icon">
+              <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="none" stroke-width="0" fill="#f5f5f5"
+                  d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781">
+                </path>
+              </svg>
+              <i class="bx bx-tachometer"></i>
+            </div>
+            <h4><a href="">Remote access</a></h4>
+            <p>Возможность получить доступ ко всем функциям в online режиме</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rooms text-center" id="features2-5">
+    <div class="container">
+      <h2 class="align-center pb-5 pt-5">
+        Наши номера
+      </h2>
+      <div class="row justify-content-center">
+        <div class="card first-card col-12 col-lg-6">
+          <div class="card-wrapper">
+            <div class="card-img">
+              <a href="/room1">
+                <img src="https://cdn.discordapp.com/attachments/823229429920694293/924653623013670942/1f19a743caf264eb.jpg"
+                  alt="hotel html template"></a>
+            </div>
+            <div class="card-box">
+              <h3 class="first-card-title mbr-fonts-style">
+                Одноместный делюкс
+              </h3>
+              <div class="first-card-info pb-3">
+                <p>
+                  Лучший номер для отдыха и восстановления, в котором есть всё для комфортного пребывания в нашем
+                  санатории
+                </p>
+              </div>
+              <div class="mbr-section-btn"><a href="#contact" class="btn btn-md btn-secondary text-uppercase">
+                  Забронировать сейчас
+                </a></div>
+            </div>
+          </div>
+        </div>
+        <div class="media-container-column col-lg-6 ps-4">
+          <div class="row first-row">
+            <div class="card col-sm-12 col-md-6 first-child pe-2">
+              <div class="card-wrapper">
+                <div class="card-img">
+                  <a href="/room2" class="portfolio-details-lightbox"
+                    data-glightbox="type: external"><img
+                      src="https://cdn.discordapp.com/attachments/823229429920694293/924662137698279504/nomer_odin.jpg"
+                      alt="html hotel template"></a>
+                </div>
+                <div class="card-box caption mbr-white">
+                  <p class="mbr-text price">
+                    Одноместный стандарт
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card col-sm-12 col-md-6 ps-2">
+              <div class="card-wrapper">
+                <div class="card-img">
+                  <a href="/room3" class="portfolio-details-lightbox"
+                    data-glightbox="type: external"><img
+                      src="https://cdn.discordapp.com/attachments/823229429920694293/924653622774628452/e25401cc1692371d.jpg"
+                      alt="html hotel template"></a>
+                </div>
+                <div class="card-box caption mbr-white">
+                  <p class="mbr-text price">
+                    Двухместный стандарт
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row second-row">
+            <div class="card col-sm-12 col-md-6 first-child pe-2">
+              <div class="card-wrapper">
+                <div class="card-img">
+                  <a href="/room4" class="portfolio-details-lightbox"
+                    data-glightbox="type: external"><img
+                      src="https://cdn.discordapp.com/attachments/823229429920694293/924653623676383242/da81b6d72532f025.jpg"
+                      alt="html hotel template"></a>
+                </div>
+                <div class="card-box caption mbr-white">
+                  <p class="mbr-text price">
+                    Трёхместный стандарт
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card col-sm-12 col-md-6 ps-2">
+              <div class="card-wrapper">
+                <div class="card-img">
+                  <a href="/room5" class="portfolio-details-lightbox"
+                    data-glightbox="type: external"><img
+                      src="https://cdn.discordapp.com/attachments/823229429920694293/924653623974170654/c504621b1d3241c9.jpg"
+                      alt="html hotel template"></a>
+                </div>
+                <div class="card-box caption mbr-white">
+                  <p class="mbr-text price">
+                    Двухместный делюкс
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="procedure" class="procedure">
+    <div class="container" data-aos="fade-up">
+        <h2 class="pt-5 pb-5">Procedures</h2>
+      <div class="row procedure-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/123.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Acupuncture</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure1"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/124.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Herbal medicine</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure2"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/125.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Phototherapy</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure3"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/126.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Physiotherapy</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure4"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/127.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Massage</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure5"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/128.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Mud therapy</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure6"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/129.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Hydromassage</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure7"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 procedure-item">
+          <div class="procedure-wrap">
+            <img th:src="@{/image/130.jpg}" class="img-fluid" alt="">
+            <div class="procedure-info">
+              <h4>Baths</h4>
+              <p>Procedure</p>
+              <div class="procedure-links">
+                <a href="/procedure8"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="forma" data-aos="fade-up">
+    <h2 class="py-5 text-center">Форма для бронирования</h2>
+    <div class="text-white py-3" id="contact">
+      <form class="needs-validation" novalidate="">
+        <div class="col-md-7 container">
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="Name" class="form-label text-dark">Name</label>
+              <input type="text" class="form-control" id="Name" placeholder="John Smith" value="" required="">
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="Room" class="form-label text-dark">Room type</label>
+              <input type="text" class="form-control" id="Room" placeholder="Standard" value="" required="">
+              <div class="invalid-feedback text-dark">
+                Valid room number is required.
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-sm-6">
+              <label for="arrived" class="form-label text-dark">Date of arrive:</label>
+              <input type="date" class="form-control text-dark" id="arrived" value="2021-12-29">
+              <div class="invalid-feedback">
+                Valid date is required.
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="moved" class="form-label text-dark">Departure date:</label>
+              <input type="date" class="form-control text-dark" id="moved" value="2021-12-29">
+              <div class="invalid-feedback text-dark">
+                Valid date is required.
+              </div>
+            </div>
+          </div>
+          <div class="mbr-section-btn text-center mt-5 mb-5">
+          <a class="btn btn-lg btn-secondary text-uppercase py-2" type="submit">Забронировать</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="container py-5 mt-5">
+    <div class="row">
+      <div class="col-3 col-md">
+        <img src="/image/logo.png" width="10%">
+        <small class="d-block mb-3 text-muted">SAN © 2021</small>
+      </div>
+      <div class="col-3 col-md">
+        <h5>Наши адреса</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Льва Толстого 8</a></li>
+          <li><a class="text-muted" href="#">Тыналиева 134</a></li>
+        </ul>
+      </div>
+      <div class="col-3 col-md">
+        <h5>Контакты</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Льва Толстого 8</a></li>
+          <li><a class="text-muted" href="#">+996 555 555 555</a></li>
+          <br>
+          <li><a class="text-muted" href="#">Тыналиева 134</a></li>
+          <li><a class="text-muted" href="#">+996 777 777 777</a></li>
+        </ul>
+      </div>
+      <div class="col-3 col-md">
+        <h5>Мы в соц. сетях</h5>
+        <ul class="list-unstyled text-small">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram"
+              viewBox="0 0 16 16">
+              <path
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+            </svg>
+            <a class="text-muted" href="#">Instagram</a>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram"
+              viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" />
+            </svg>
+            <a class="text-muted" href="#">Telegram</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>
