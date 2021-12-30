@@ -4,24 +4,18 @@ import javax.validation.constraints.*;
 
 public class Worker {
     private int workerId;
-    @NotEmpty(message="Name should be not empty")
-//    @NotBlank(message = "Name is mandatory")
+    @NotEmpty(message = "Name should not be empty")
     private String name;
 
-    @NotEmpty(message="Position should be not empty")
-    @Pattern(regexp = "assistant")
-    @Pattern(regexp = "manager")
-//    @NotBlank(message = "Position is mandatory")
+    @NotEmpty(message = "Position should not be empty")
     private String position;
 
-//    @NotEmpty(message="Login should be not empty")
-//    @NotBlank(message = "Login is mandatory")
+    @NotEmpty(message="Login should be not empty")
     private String login;
 
-    @NotEmpty(message="Password should be not empty")
     @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}",
             message = "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters")
-//    @NotBlank(message = "Name is mandatory")
+    @NotEmpty(message="Password should be not empty")
     private String password;
 
     public int getWorkerId() {

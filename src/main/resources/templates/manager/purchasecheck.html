@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,13 +10,27 @@
     <link rel="stylesheet" th:href="@{/css/style2.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Worker</title>
 </head>
 <body>
 
 <style>
 
-    body{overflow-y: scroll;}
+    .back{
+        background: url(https://cdn.discordapp.com/attachments/721424095169871983/925371186475581440/2.jpg) top right;
+        background-size: cover;
+        height: 200px;
+    }
+    .head {
+        background-color: #548ba8;
+    }
+
+    body {
+        overflow-y: scroll;
+    }
 
     .widget-left
     {
@@ -124,6 +138,15 @@
             <span class="tooltip"
                   style="z-index: 1000;">Schedule</span>
         </li>
+        <div sec:authorize="hasRole('ROLE_DIRECTOR')">
+            <li>
+                <a th:href="@{/director/}">
+                    <i class='bx bx-arrow-back'></i>
+                    <span class="links_name">Back</span>
+                </a>
+                <span class="tooltip">Back</span>
+            </li>
+        </div>
     </ul>
     <div class="profile_content">
         <div class="profile">
@@ -201,19 +224,19 @@
                                 <div class="col-md-9">
                                     <div class="invoice-wrapper">
                                         <div class="intro">
-                                            Hi <strong th:text="${worker.getName()}">John McClane</strong>,
+                                            Hallo <strong th:text="${worker.getName()}">John McClane</strong>,
                                             <br>
-                                            This is the receipt for a payment of <strong th:text="${procedure.getName()}">Procedure</strong>
+                                            Dies ist die Quittung für eine Zahlung von <strong th:text="${procedure.getName()}">Procedure</strong>
                                         </div>
 
                                         <div class="payment-info">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <span>Payment No.</span>
+                                                    <span>Zahlung No.</span>
                                                     <strong th:text="${check.getPurchaseID()}">434334343</strong>
                                                 </div>
                                                 <div class="col-sm-6 text-right">
-                                                    <span>Payment Date</span>
+                                                    <span>Zahlungsdatum</span>
                                                     <strong th:text="${check.getDate() + ' - ' + check.getTime()}">Jul 09, 2014 - 12:20 pm</strong>
                                                 </div>
                                             </div>
@@ -222,12 +245,12 @@
                                         <div class="payment-details">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <span>Client</span>
+                                                    <span>Klient</span>
                                                     <strong th:text="${worker.getName()}">John McClane</strong>
                                                     <p th:text="${worker.getPosition()}">Position</p>
                                                 </div>
                                                 <div class="col-sm-6 text-right">
-                                                    <span>Payment To</span>
+                                                    <span>Zahlung To</span>
                                                     <strong>
                                                         san
                                                     </strong>
@@ -245,9 +268,9 @@
                                         <div class="line-items">
                                             <div class="headers clearfix">
                                                 <div class="row">
-                                                    <div class="col-xs-4">Description</div>
-                                                    <div class="col-xs-3">Quantity</div>
-                                                    <div class="col-xs-5 text-right">Amount</div>
+                                                    <div class="col-xs-4">Beschreibung</div>
+                                                    <div class="col-xs-3">Menge</div>
+                                                    <div class="col-xs-5 text-right">Höhe</div>
                                                 </div>
                                             </div>
                                             <div class="items">
@@ -259,30 +282,30 @@
                                                         :
                                                     </div>
                                                     <div class="col-xs-5 amount ms-5">
-                                                        <p><b>Old Price:</b> <span th:text="${procedure.getPrice() + ' som'}">Price</span> <span class="text-success"><b>-50% Offer!</b></span></p>
-                                                        <p><b>Discount price:</b> <span th:text="${procedure.getPriceDiscount() + ' som'}">Price</span></p>
+                                                        <p><b>Alter Preis:</b> <span th:text="${procedure.getPrice() + ' som'}">Price</span> <span class="text-success"><b>-50% Offer!</b></span></p>
+                                                        <p><b>Reduzierter Preis:</b> <span th:text="${procedure.getPriceDiscount() + ' som'}">Price</span></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="total text-right">
                                                 <p class="extra-notes">
-                                                    <strong>Extra Notes</strong>
-                                                    Please check your schedule of procedures to not miss out.
-                                                    Thanks a lot.
+                                                    <strong>Zusätzliche Hinweise</strong>
+                                                    Bitte überprüfen Sie Ihren Ablaufplan, um nichts zu verpassen.
+                                                    Vielen Dank.
                                                 </p>
                                                 <div class="field grand-total" style="float: right">
-                                                    Total <span th:text="${procedure.getPriceDiscount() + ' som'}">$312.00</span>
+                                                    Gesamt <span th:text="${procedure.getPriceDiscount() + ' som'}">$312.00</span>
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="print">
                                                 <a href="#" style="text-decoration: none;">
                                                     <i class="fa fa-print"></i>
-                                                    Print this receipt
+                                                    Drucken Sie diese Quittung aus
                                                 </a>
                                                 <a th:href="@{/manager/allprocedures}" style="text-decoration: none;">
                                                     <i class="fa fa-print"></i>
-                                                    Close
+                                                    Nah dran
                                                 </a>
                                             </div>
                                         </div>
@@ -312,7 +335,7 @@
     }
 
 </script>
-<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'66984b5d9a980bd88b936ac37ca9bdf2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/7206a0560b4352ff43b0b986ccf1c4f88edab7a6.css'],source:'meteotrend'});</script>
+<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'dbba2d2a71eadd1ffc563722aa4881e2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/43aa6b94b2431026f2350c1b297949bcee43eeb7.css'],source:'meteotrend'});</script>
 </body>
 
 </html>

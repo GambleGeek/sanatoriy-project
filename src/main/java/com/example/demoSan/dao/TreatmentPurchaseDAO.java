@@ -39,6 +39,15 @@ public class TreatmentPurchaseDAO {
         return namedParameterJdbcTemplate.query(sql, parameters, new TreatmentMapper());
     }
 
+    public static List<Treatment> getAllTreatmentsHistory(int clientID){
+        String sql = "select t.TreatmentID, p.`Name`, t.ProcedureID, t.`Date`, t.`Time` \n" +
+                "from treatment t\n" +
+                "join `procedures` p \n" +
+                "on t.ProcedureID = p.ProcedureID\n" +
+                "where ClientID=?";
+        return jdbcTemplate.query(sql, new Object[]{clientID}, new TreatmentWithNameMapper());
+    }
+
     public static Purchase showLastPurchase(){
         return jdbcTemplate.query("SELECT * FROM purchase WHERE PurchaseID=(SELECT MAX(PurchaseID) FROM purchase)",
                 new PurchaseMapper())
@@ -119,7 +128,6 @@ public class TreatmentPurchaseDAO {
             parameters.replace("procedureID", i);
             treatments.add(jdbcTemplate.queryForObject(SQL, new Object[]{i, clientId, i}, new TreatmentWithNameMapper()));
         }
-
         return treatments;
     }
 }

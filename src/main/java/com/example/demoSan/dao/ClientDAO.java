@@ -61,4 +61,15 @@ public class ClientDAO {
                         "FROM `client` INNER JOIN `clientsWithProcedure` ON IDclient = ClientID ORDER BY `COUNT(ProcedureID)` asc LIMIT 1\n",
                     new ClientWithProcedureNumberMapper()).stream().findAny().orElse(null);
     }
+
+    public static void update(int id, Client updatedClient){
+        jdbcTemplate.update("UPDATE client SET name=?, address=?, height=?, weight=?, illness=? " +
+                        "WHERE IDclient=?", updatedClient.getName(), updatedClient.getAddress(), updatedClient.getHeight(),
+                updatedClient.getWeight(), updatedClient.getIllness(), id);
+    }
+
+    public static void delete(int id){
+        jdbcTemplate.update("DELETE FROM treatment WHERE ClientID=?", id);
+        jdbcTemplate.update("DELETE FROM client WHERE IDclient=?", id);
+    }
 }

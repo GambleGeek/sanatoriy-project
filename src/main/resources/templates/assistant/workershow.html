@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,14 +9,28 @@
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/style2.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Worker</title>
 </head>
 <body>
 
 <style>
 
-    body{overflow-y: scroll;}
+            .back{
+            background: url(https://cdn.discordapp.com/attachments/721424095169871983/925371186475581440/2.jpg) top right;
+            background-size: cover;
+            height: 200px;
+        }
+        .head {
+            background-color: #548ba8;
+        }
+
+        body {
+            overflow-y: scroll;
+        }
 
     .widget-left
     {
@@ -84,32 +98,41 @@
         <li>
             <a th:href="@{/assistant/}">
                 <i class='bx bxs-home'></i>
-                <span class="links_name">Home</span>
+                <span class="links_name">Haupt</span>
             </a>
-            <span class="tooltip">Home</span>
+            <span class="tooltip">Haupt</span>
         </li>
         <li>
             <a th:href="@{/assistant/allclients}">
                 <i class='bx bx-user'></i>
-                <span class="links_name">Client List</span>
+                <span class="links_name">Kundenliste</span>
             </a>
-            <span class="tooltip">Client List</span>
+            <span class="tooltip">Kundenliste</span>
         </li>
         <li>
             <a th:href="@{/assistant/allprocedures}">
                 <i class='bx bx-plus-medical' ></i>
-                <span class="links_name">Procedure List</span>
+                <span class="links_name">Anwendungensliste</span>
             </a>
-            <span class="tooltip">Procedure List</span>
+            <span class="tooltip">Anwendungensliste</span>
         </li>
         <li>
             <a th:href="@{/assistant/schedule}">
                 <i class='bx bx-time'></i>
-                <span class="links_name">Schedule</span>
+                <span class="links_name">Zeitplan</span>
             </a>
             <span class="tooltip"
-                  style="z-index: 1000;">Schedule</span>
+                  style="z-index: 1000;">Zeitplan</span>
         </li>
+        <div sec:authorize="hasRole('ROLE_DIRECTOR')">
+            <li>
+                <a th:href="@{/director/}">
+                    <i class='bx bx-arrow-back'></i>
+                    <span class="links_name">Zurück</span>
+                </a>
+                <span class="tooltip">Zurück</span>
+            </li>
+        </div>
     </ul>
     <div class="profile_content">
         <div class="profile">
@@ -131,7 +154,7 @@
 <div class="home_content"
      style="left: 75px;">
     <div class="">
-        <div class="rounded-top text-white d-flex" style="background-color: #000; height:200px;">
+        <div class="rounded-top text-white d-flex back">
             <div class="ms-4 d-flex flex-column" style="width: 150px; margin-top: 72px">
                 <img th:src="@{/image/{id}.jpg(id=${worker.getWorkerId()})}" alt="Worker Image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px;">
             </div>
@@ -166,36 +189,64 @@
                      style="margin-right: 50px;
                 height: 30%;">
                     <h5 class="mt-2 mb-4 fw-bold text-center">Погода в Бишкеке</h5>
-                    <div id="_MI_66984b5d9a980bd88b936ac37ca9bdf2" class="widget"
-                         style="margin-left: 3px;">
-                        <a href="https://ru.meteotrend.com/">Прогноз погоды</a></div>
+                        <div id="_MI_dbba2d2a71eadd1ffc563722aa4881e2" class="widget" style="margin-left: 3px;">
+                            <a href="https://ru.meteotrend.com/">Прогноз погоды</a>
+                        </div>
 
                     <hr>
 
-                    <h5 class="mt-2 b-2 text-center">О себе</h5>
-                    <p>Мои Контакты: <span style="margin-left: 50px;">+996 777 777 777</span></p>
+                    <h5 class="mt-2 b-2 text-center">Über mich</h5>
+                    <p>Meine Kontakte: <span style="margin-left: 50px;">+996 777 777 777</span></p>
 
                 </div>
 
                 <!--    change-->
                 <!--Основной контент-->
-                <div class="col-md-9 rounded pb-3">
-                    <h4 class="text-center my-4">Bought Procedure's</h4>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div th:each="procedure: ${myProcedures}">
-                            <div class="col">
-                                <div class="card" style="width: 18rem;">
-                                    <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${procedure.getId()})}">
-                                    <div class="card-body text-center">
-                                        <a th:href="@{'/assistant/allprocedures/{id}'(id=${procedure.getId()})}" style="text-decoration: none">
-                                            <h5 class="card-text" th:text="${procedure.getName()}">Procedure name</h5>
-                                        </a>
+                <div class="col-md-8 border">
+                    <div class="col-md-12 rounded pb-3">
+                        <div class="row card-header head pt-4">
+                            <h4 class="text-white">Persönliche Karte</h4>
+                        </div>
+
+                        <div class="col-md-12 mt-3">
+                            <div class="row p-2 rounded">
+                                <div class="col-md-3">
+                                    <img th:src="@{/image/{id}.jpg(id=${workerId})}" class="img-fluid">
+                                </div>
+                                <div class="col-md-6 border-left" style="line-height: 0.5em">
+                                    <h3 th:text="${worker.getName()}" class="mb-1">NAME</h3>
+                                    <p class="mt-3">Birthdate: 1991-06-29</p>
+                                    <p>Email: worker@gmail.com</p>
+                                    <p>Addresse: Romanova 7</p>
+                                    <p>Stadt: Balykchy</p>
+                                    <p>Postleitzahl: 23411</p>
+                                    <p>Datum der Anstellung: 2020-05-03</p>
+                                    <p>Arbeitnehmerstatus: Aktiv</p>
+                                    <p>Mitarbeiter Typ: Vollzeit</p>
+                                    <p>Bildung: BGU University</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 rounded pb-3">
+                        <h4 class="text-center my-4">Gekauft Anwendungen</h4>
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            <div th:each="procedure: ${myProcedures}">
+                                <div class="col">
+                                    <div class="card" style="width: 18rem;">
+                                        <img class="img-fluid card-img-top" th:src="@{/image/{id}.jpg(id=${procedure.getId()})}">
+                                        <div class="card-body text-center">
+                                            <a th:href="@{'/assistant/allprocedures/{id}'(id=${procedure.getId()})}" style="text-decoration: none">
+                                                <h5 class="card-text" th:text="${procedure.getName()}">Procedure name</h5>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -216,7 +267,7 @@
     }
 
 </script>
-<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'66984b5d9a980bd88b936ac37ca9bdf2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/7206a0560b4352ff43b0b986ccf1c4f88edab7a6.css'],source:'meteotrend'});</script>
+<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'dbba2d2a71eadd1ffc563722aa4881e2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/43aa6b94b2431026f2350c1b297949bcee43eeb7.css'],source:'meteotrend'});</script>
 </body>
 
 </html>

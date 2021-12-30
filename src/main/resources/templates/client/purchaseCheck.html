@@ -14,8 +14,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
+        .back{
+            background: url(https://cdn.discordapp.com/attachments/721424095169871983/925371186475581440/2.jpg) top right;
+            background-size: cover;
+            height: 200px;
+        }
         .head {
-            background-color: lightseagreen;
+            background-color: #548ba8;
         }
 
         .font_color {
@@ -80,106 +85,105 @@
 </head>
 
 <body>
-
-<div class="sidebar">
-    <div class="logo_content">
-        <div class="logo">
-            <i class="bx">
-                <img th:src="@{/image/logo.png}" style="height: 50px; width: 50px;">
-            </i>
-            <div class="logo_name">San</div>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class="bx">
+                    <img th:src="@{/image/logo.png}" style="height: 50px; width: 50px;">
+                </i>
+                <div class="logo_name">San</div>
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
         </div>
-        <i class="bx bx-menu" id="btn"></i>
+        <ul class="nav_list">
+            <li>
+                <a href="/client/">
+                    <i class='bx bxs-home'></i>
+                    <span class="links_name">Haupt</span>
+                </a>
+                <span class="tooltip">Haupt</span>
+            </li>
+            <li>
+                <a href="/client/mycard">
+                    <i class="fas fa-heartbeat"></i>
+                    <span class="links_name">Meine Gesundheitskarte</span>
+                </a>
+                <span class="tooltip">Meine Gesundheitskarte</span>
+            </li>
+            <li>
+                <a href="/client/allprocedures">
+                    <i class='bx bx-plus-medical'></i>
+                    <span class="links_name">Anwendungsliste</span>
+                </a>
+                <span class="tooltip">Awendungsliste</span>
+            </li>
+            <li>
+                <a href="/client/myprocedures">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Meine anwendungen</span>
+                </a>
+                <span class="tooltip">Meine anwendungen</span>
+            </li>
+            <li>
+                <a href="/client/checks">
+                    <i class="fas fa-money-bill"></i>
+                    <span class="links_name">Meine Einkäufe</span>
+                </a>
+                <span class="tooltip">Meine Einkäufe</span>
+            </li>
+            <li>
+                <a href="/client/showHistory">
+                    <i class="fas fa-notes-medical"></i>
+                    <span class="links_name">Meine Behandlung</span>
+                </a>
+                <span class="tooltip" style="z-index: 1000;">Meine Behandlung</span>
+            </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img th:src="@{/image/manager2.png}" class="img-fluid">
+                    <div class="name_job">
+                        <div class="name" th:text="${client.getName()}">name</div>
+                        <div class="job">Client</div>
+                    </div>
+                </div>
+                <!-- ссылка -->
+                <a href="/logout">
+                    <i class="bx bx-log-out text-white" id="log_out"></i>
+                </a>
+            </div>
+        </div>
     </div>
-    <ul class="nav_list">
-        <li>
-            <a href="/client/">
-                <i class='bx bxs-home'></i>
-                <span class="links_name">Home</span>
-            </a>
-            <span class="tooltip">Home</span>
-        </li>
-        <li>
-            <a href="/client/mycard">
-                <i class="fas fa-heartbeat"></i>
-                <span class="links_name">My medical card</span>
-            </a>
-            <span class="tooltip">My medical card</span>
-        </li>
-        <li>
-            <a href="/client/allprocedures">
-                <i class='bx bx-plus-medical'></i>
-                <span class="links_name">Procedure List</span>
-            </a>
-            <span class="tooltip">Procedure List</span>
-        </li>
-        <li>
-            <a href="/client/myprocedures">
-                <i class='bx bx-user'></i>
-                <span class="links_name">My Procedures</span>
-            </a>
-            <span class="tooltip">My Procedures</span>
-        </li>
-        <li>
-            <a href="/client/checks">
-                <i class="fas fa-money-bill"></i>
-                <span class="links_name">My Purchases</span>
-            </a>
-            <span class="tooltip">My Purchases</span>
-        </li>
-        <li>
-            <a href="/client/showHistory">
-                <i class="fas fa-notes-medical"></i>
-                <span class="links_name">My Treatment</span>
-            </a>
-            <span class="tooltip" style="z-index: 1000;">My Treatment</span>
-        </li>
-    </ul>
-    <div class="profile_content">
-        <div class="profile">
-            <div class="profile_details">
-                <img th:src="@{/image/manager2.png}" class="img-fluid">
-                <div class="name_job">
-                    <div class="name" th:text="${client.getName()}">name</div>
-                    <div class="job">Client</div>
+    
+    <div class="home_content" style="left: 75px;">
+        <div class="">
+            <div class="rounded-top text-white d-flex back">
+                <div class="ms-5 d-flex flex-column" style="margin-top: 45px">
+                    <img th:src="@{/image/{id}.jpg(id=${client.getId()})}" class="img-thumbnail" style="object-fit: cover; height: 150px; width: 150px;">
+                </div>
+                <div class="ms-1" style="margin-top: 130px;">
+                    <h5 th:text="${client.getName()}">John Smith</h5>
+                    <p>Client</p>
                 </div>
             </div>
-            <!-- ссылка -->
-            <a href="/logout">
-                <i class="bx bx-log-out text-white" id="log_out"></i>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="home_content" style="left: 75px;">
-    <div class="">
-        <div class="rounded-top text-white d-flex" style="background-color: #000; height:200px;">
-            <div class="ms-5 d-flex flex-column" style="width: 150px; margin-top: 45px">
-                <img th:src="@{/image/manager2.png}" class="img-fluid">
-            </div>
-            <div class="ms-1" style="margin-top: 130px;">
-                <h5 th:text="${client.getName()}">John Smith</h5>
-                <p>Client</p>
-            </div>
-        </div>
             <div class="p-4 text-black">
                 <hr>
                 <div class="d-flex justify-content-center mt-4">
                     <!--Основной контент-->
                     <div class="border px-3" style="margin-right: 50px; width: 330px;
-                height: 30%;">
+                    height: 30%;">
                         <h5 class="mt-2 mb-4 fw-bold text-center pt-3">Weather in Bishkek</h5>
-                        <div id="_MI_66984b5d9a980bd88b936ac37ca9bdf2" class="widget" style="margin-left: 3px;">
+                        <div id="_MI_dbba2d2a71eadd1ffc563722aa4881e2" class="widget" style="margin-left: 3px;">
                             <a href="https://ru.meteotrend.com/">Прогноз погоды</a>
                         </div>
-
+    
                         <hr>
-
-                        <h5 class="mt-2 b-2 text-center">Events in Sanatorium</h5>
-                        <p class="fw-bold text-center mb-1">20 December</p>
-                        <p class="mb-1">10:00-12:00 - First Event In Main Hall</p>
-                        <p>18:00-19:00 - Dinner By Famous Chef</p>
+    
+                        <h5 class="mt-2 b-2 text-center">Veranstaltungen im Sanatorium</h5>
+                        <p class="fw-bold text-center mb-1">20. Dezember</p>
+                        <p class="mb-1">10:00-12:00 - Erste Veranstaltung in der Haupthalle</p>
+                        <p>18:00-19:00 - Abendessen bei einem berühmten Koch</p>
                     </div>
 
                     <!-- HERE -->
@@ -190,19 +194,19 @@
                                 <div class="col-md-12">
                                     <div class="invoice-wrapper">
                                         <div class="intro">
-                                            Hi <strong th:text="${client.getName()}">John McClane</strong>,
+                                            Guten Tag <strong th:text="${client.getName()}">John McClane</strong>,
                                             <br>
-                                            This is the receipt for a payment of <strong th:text="${procedure.getName()}">Procedure</strong>
+                                            Dies ist die Quittung für eine Zahlung von <strong th:text="${procedure.getName()}">Procedure</strong>
                                         </div>
                     
                                         <div class="payment-info mt-2">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <span>Payment No.</span>
+                                                    <span>Zahlungsnr.</span>
                                                     <strong th:text="${check.getPurchaseID()}">434334343</strong>
                                                 </div>
                                                 <div class="col-sm-6 text-right">
-                                                    <span>Payment Date</span>
+                                                    <span>Datum der Zahlung</span>
                                                     <strong th:text="${check.getDate() + ' - ' + check.getTime()}">Jul 09, 2014 - 12:20 pm</strong>
                                                 </div>
                                             </div>
@@ -211,12 +215,12 @@
                                         <div class="payment-details mt-2">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <span>Client</span>
+                                                    <span>Kunde</span>
                                                     <strong th:text="${client.getName()}">John McClane</strong>
                                                     <p th:text="${client.getAddress()}">Address</p>
                                                 </div>
                                                 <div class="col-sm-6 text-right">
-                                                    <span>Payment To</span>
+                                                    <span>Zahlung an</span>
                                                     <strong>
                                                         san
                                                     </strong>
@@ -234,9 +238,9 @@
                                         <div class="line-items mt-2">
                                             <div class="headers clearfix">
                                                 <div class="row">
-                                                    <div class="col-md-4">Description</div>
-                                                    <div class="col-md-4">Quantity</div>
-                                                    <div class="col-md-4 text-right">Amount</div>
+                                                    <div class="col-md-4">Beschreibung</div>
+                                                    <div class="col-md-4">Menge</div>
+                                                    <div class="col-md-4 text-right">Betrag</div>
                                                 </div>
                                             </div>
                                             <div class="items">
@@ -254,23 +258,23 @@
                                             </div>
                                             <div class="total text-right mt-2">
                                                 <p class="extra-notes">
-                                                    <strong>Extra Notes</strong>
-                                                    Please check your schedule of procedures to not miss out.
-                                                    Thanks a lot.
+                                                    <strong>Zusätzliche Anmerkungen</strong>
+                                                    Bitte überprüfen Sie Ihren Verfahrensplan, um nichts zu verpassen.
+                                                    Herzlichen Dank.
                                                 </p>
                                                 <div class="field grand-total">
-                                                    Total <span class="fw-bold" th:text="${procedure.getPrice() + ' som'}">$312.00</span>
+                                                    Insgesamt <span class="fw-bold" th:text="${procedure.getPrice() + ' som'}">$312.00</span>
                                                 </div>
                                             </div>
                     
                                             <div class="print">
                                                 <a href="#">
                                                     <i class="fa fa-print"></i>
-                                                    Print this receipt
+                                                    Diese Quittung drucken
                                                 </a>
                                                 <a th:href="@{/client/}">
                                                     <i class="fa fa-print"></i>
-                                                    Close
+                                                    Schließen 
                                                 </a>
                                             </div>
                                         </div>
@@ -302,8 +306,7 @@
         }
 
     </script>
-    <script
-        type='text/javascript'>(function (d, w, t, k) { function l() { if (typeof (w._MIOB_) == 'undefined') { w._MIOB_ = {}; } var m = w._MIOB_[t] = k; var s = d.createElement('script'); m.p = ('https:' == d.location.protocol ? 'https:' : 'http:'); s.type = 'text/javascript'; s.async = true; s.src = m.p + '//info.meteotrend.com/mt/' + m.t + '.js'; d.body.appendChild(s); } if (d.readyState == 'complete') l(); else { if (w.attachEvent) w.attachEvent('onload', l); else w.addEventListener('load', l, false); } })(document, window, '66984b5d9a980bd88b936ac37ca9bdf2', { t: '4x6', sw: { "pname": 1, "ccond": 1, "ccdesc": 1, "dayblock": 1, "tblank": 1 }, css: ['{p}//info.meteotrend.com/mt/{t}.css', '{p}//info.meteotrend.com/cs/7206a0560b4352ff43b0b986ccf1c4f88edab7a6.css'], source: 'meteotrend' });</script>
+<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'dbba2d2a71eadd1ffc563722aa4881e2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/43aa6b94b2431026f2350c1b297949bcee43eeb7.css'],source:'meteotrend'});</script>
 
 
 </body>

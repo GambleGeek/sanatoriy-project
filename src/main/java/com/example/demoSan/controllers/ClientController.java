@@ -50,12 +50,10 @@ public class ClientController {
     // история получения всех процедур клиентом
     @GetMapping("/showHistory")
     public String showHistory(Model model){
-        // данные о получении, находимые по ID клиента и процедуры
-//        model.addAttribute("treatmentHistory", TreatmentPurchaseDAO.treatmentHistory(userId.get(), procedureId));
-        // передаем данные о процедуре, чтобы отобразить её название
-//        model.addAttribute("procedure", ProcedureDAO.showProcedure(procedureId));
+//         данные о получении, находимые по ID клиента и процедуры
+        model.addAttribute("treatmentHistory", TreatmentPurchaseDAO.getAllTreatmentsHistory(userId.get()));
         model.addAttribute("client", ClientDAO.showClient(userId.get()));
-        return "client/procedureHistoryOfOne";
+        return "client/procedureHistory";
     }
 
     // история получения конкретной процедуры клиентом

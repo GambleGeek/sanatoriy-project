@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,13 +10,27 @@
     <link rel="stylesheet" th:href="@{/css/style2.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Worker</title>
 </head>
 <body>
 
 <style>
 
-    body{overflow-y: scroll;}
+    .back{
+        background: url(https://cdn.discordapp.com/attachments/721424095169871983/925371186475581440/2.jpg) top right;
+        background-size: cover;
+        height: 200px;
+    }
+    .head {
+        background-color: #548ba8;
+    }
+
+    body {
+        overflow-y: scroll;
+    }
 
     .widget-left
     {
@@ -124,6 +138,15 @@
             <span class="tooltip"
                   style="z-index: 1000;">Schedule</span>
         </li>
+        <div sec:authorize="hasRole('ROLE_DIRECTOR')">
+            <li>
+                <a th:href="@{/director/}">
+                    <i class='bx bx-arrow-back'></i>
+                    <span class="links_name">Back</span>
+                </a>
+                <span class="tooltip">Back</span>
+            </li>
+        </div>
     </ul>
     <div class="profile_content">
         <div class="profile">
@@ -145,7 +168,7 @@
 <div class="home_content"
      style="left: 75px;">
     <div class="">
-        <div class="rounded-top text-white d-flex" style="background-color: #000; height:200px;">
+        <div class="rounded-top text-white d-flex back">
             <div class="ms-4 d-flex flex-column" style="width: 150px; margin-top: 72px">
                 <img th:src="@{/image/{id}.jpg(id=${worker.getWorkerId()})}" alt="Worker Image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px;">
             </div>
@@ -180,9 +203,9 @@
                      style="margin-right: 50px;
                 height: 30%;">
                     <h5 class="mt-2 mb-4 fw-bold text-center">Погода в Бишкеке</h5>
-                    <div id="_MI_66984b5d9a980bd88b936ac37ca9bdf2" class="widget"
-                         style="margin-left: 3px;">
-                        <a href="https://ru.meteotrend.com/">Прогноз погоды</a></div>
+                    <div id="_MI_dbba2d2a71eadd1ffc563722aa4881e2" class="widget" style="margin-left: 3px;">
+                        <a href="https://ru.meteotrend.com/">Прогноз погоды</a>
+                    </div>
 
                     <hr>
 
@@ -193,50 +216,55 @@
 
                 <!--    change-->
                 <!--Основной контент-->
-                <div class="col-md-9 bg-light rounded pb-3">
-                    <div class="d-flex justify-content-center row">
-                        <div class="col-md-9 text-center">
-                            <h2>Client's card</h2>
+                <div class="col-md-9">
+                    <div class="col-md-12 border rounded pb-3">
+                        <div class="row card-header head pt-4">
+                            <h4 class="text-white">client's card</h4>
                         </div>
 
-                        <div class="col-md-9 mt-3">
-                            <div class="row p-2 bg-white border rounded">
-                                <div class="col-md-4">
+                        <div class="col-md-12 mt-3">
+                            <div class="row p-2 border rounded">
+                                <div class="col-md-3">
                                     <img th:src="@{/image/{id}.jpg(id=${client.getId()})}" class="img-fluid">
                                 </div>
-                                <div class="col-md-8 border-left">
+                                <div class="col-md-6 border-left">
                                     <h3 th:text="${client.getName()}" class="mb-1">NAME</h3>
-                                    <span th:text="'Birthdate: ' + ${client.getBirthdate()}">mm.dd.yyyy</span><br>
+                                    <span th:text="'Geburtstag: ' + ${client.getBirthdate()}">mm.dd.yyyy</span><br>
                                     <div class="mt-1" th:text="'Illness: ' + ${client.getIllness()}">Illness</div>
                                     <div class="mt-1">
-                                        <span th:text="'Gender: ' + ${client.getGender()}">Gender</span>&emsp;
-                                        <span th:text="'Bloodtype: ' + ${client.getBloodtype()}">Bloodtype</span>&emsp;
+                                        <span th:text="'Geschlecht: ' + ${client.getGender()}">Gender</span>&emsp;
+                                        <span th:text="'Blutgruppe: ' + ${client.getBloodtype()}">Bloodtype</span>&emsp;
                                         <span th:text="'Rezus: ' + ${client.getRezus()}">Rezus</span>
                                     </div>
                                     <div class="mt-1">
-                                        <span th:text="'Height: ' + ${client.getHeight() + ' cm'}">Height</span>&emsp;
-                                        <span th:text="'Weight: ' + ${client.getWeight() + ' kg'}">Weight</span>&emsp;
+                                        <span th:text="'Höhe: ' + ${client.getHeight() + ' cm'}">Height</span>&emsp;
+                                        <span th:text="'Gewicht: ' + ${client.getWeight() + ' kg'}">Weight</span>&emsp;
                                     </div>
                                     <div class="mt-1">
                                         <span th:text="'Address: ' + ${client.getAddress()}">Address</span>
                                     </div>
                                     <div class="mt-1">
-                                        <span th:text="'Arrived on: ' + ${reservation.getArrivedString}"></span>&emsp;
-                                        <span th:text="'Moved out: ' + ${reservation.getMoved_outString}"></span>
+                                        <span th:text="'Angekommen um: ' + ${reservation.getArrivedString}"></span>&emsp;
+                                        <span th:text="'Ausgezogen: ' + ${reservation.getMoved_outString}"></span>
                                     </div>
                                     <div class="mt-1">
-                                        <span th:text="'Room number: ' + ${reservation.getRoomID()}"></span>
+                                        <span th:text="'Zimmernummer: ' + ${reservation.getRoomID()}"></span>
                                     </div>
+                                    <div class="d-flex my-2">
+                                        <a th:href="@{'/manager/editclient-{clientId}'(clientId=${client.getId()})}" class="btn btn-warning mr-1" role="button" aria-pressed="true">Bearbeiten</a>
+                                    </div>
+                                    <form th:action="@{'/manager/deleteClient-{clientId}'(clientId=${client.getId()})}" th:method="POST">
+                                        <button type="submit" class="btn btn-danger">Löschen</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-center row">
-                        <div class="col-md-9 text-center mt-3 mb-1">
-                            <h4>Visited Procedures</h4>
+                    <div class="col-md-12 border rounded pb-3 mt-4">
+                        <div class="row card-header head pt-4 mb-3">
+                            <h4 class="text-white">visited procedures</h4>
                         </div>
-
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             <div th:each="procedure: ${myProcedures}">
                                 <div class="col">
@@ -255,11 +283,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-9 text-center mt-3 mb-1">
-                            <h4>Bought Procedures</h4>
+                    <div class="col-md-12 border rounded pb-3 mt-4">
+                        <div class="row card-header head pt-4 mb-3">
+                            <h4 class="text-white">bought procedures</h4>
                         </div>
-
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             <div th:each="procedure: ${boughtProcedures}">
                                 <div class="col">
@@ -273,7 +302,7 @@
                                             <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
                                             <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
 
-                                            <form method="POST" th:action="@{'/manager/' + ${workerId} + '/allclients/{id}'(id=${client.getId()})}">
+                                            <form method="POST" th:action="@{'/manager/allclients/{id}'(id=${client.getId()})}">
                                                 <input type="hidden" th:value="${client.getId()}" name="clientId" id="clientId" th:object="${clientId}">
                                                 <input type="hidden" th:value="${procedure.getId()}" name="procedureId" id="procedureId" th:object="${procedureId}">
                                                 <input class="btn btn-success btn-sm px-5" type="submit" value="Match as visited"/>
@@ -284,6 +313,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -305,7 +335,7 @@
     }
 
 </script>
-<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'66984b5d9a980bd88b936ac37ca9bdf2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/7206a0560b4352ff43b0b986ccf1c4f88edab7a6.css'],source:'meteotrend'});</script>
+<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'dbba2d2a71eadd1ffc563722aa4881e2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/43aa6b94b2431026f2350c1b297949bcee43eeb7.css'],source:'meteotrend'});</script>
 </body>
 
 </html>

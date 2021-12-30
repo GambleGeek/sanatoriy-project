@@ -1,6 +1,7 @@
 package com.example.demoSan.controllers;
 
 import com.example.demoSan.dao.*;
+import com.example.demoSan.models.Client;
 import com.example.demoSan.models.Procedure;
 import com.example.demoSan.models.PurchaseWorker;
 import com.example.demoSan.security.IUserId;
@@ -40,7 +41,7 @@ public class ManagerController {
             model.addAttribute("workerId", userId.get());
             return "manager/findprocedure";
         }
-        return "redirect:/manager/" + userId.get() + "/allprocedures";
+        return "redirect:/manager/allprocedures";
     }
 
     // подтверждение покупки процедуры
@@ -143,6 +144,7 @@ public class ManagerController {
     @GetMapping("/allprocedures/{procedureId}/edit")
     public String editProcedure(@PathVariable("procedureId") int procedureId,
                                 Model model){
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         model.addAttribute("procedure", ProcedureDAO.showProcedure(procedureId));
         model.addAttribute("procedureId", procedureId);
         return "manager/editProcedure";
@@ -153,9 +155,9 @@ public class ManagerController {
                                   Model model,
                                   @ModelAttribute("procedure") @Valid final Procedure procedure,
                                   final BindingResult bindingResult) {
-
-        if(bindingResult.hasErrors())
-            return "manager/editProcedure";
+        if(bindingResult.hasErrors()){
+            model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+            return "manager/editProcedure";}
         model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         ProcedureDAO.editProcedure(procedureId, procedure);
         return "redirect:/manager/allprocedures/{procedureId}";
@@ -186,5 +188,35 @@ public class ManagerController {
         model.addAttribute("Saturday", ProcedureDAO.procedureSchedule(6));
         model.addAttribute("Sunday", ProcedureDAO.procedureSchedule(7));
         return "manager/schedule";
+    }
+
+    // форма для изменения данных пациента
+    @GetMapping("/editclient-{clientId}")
+    public String editEmployee(@PathVariable("clientId") int clientId,
+                               Model model){
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+        model.addAttribute("client", ClientDAO.showClient(clientId));
+        return "/manager/editClient";
+    }
+
+    // изменения пациента
+    @PostMapping("/editclient-{clientId}")
+    public String updateClient(@ModelAttribute("client") @Valid Client client,
+                               BindingResult bindingResult,
+                               @PathVariable("clientId") int clientId,
+                               Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+            return "/manager/editClient";}
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+        ClientDAO.update(clientId, client);
+        return "redirect:/manager/allclients";
+    }
+
+    // удаление пациента
+    @PostMapping("/deleteClient-{clientId}")
+    public String deleteClient(@PathVariable("clientId") int clientId){
+        ClientDAO.delete(clientId);
+        return "redirect:/manager/allclients";
     }
 }

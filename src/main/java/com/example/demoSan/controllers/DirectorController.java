@@ -50,19 +50,19 @@ public class DirectorController {
     }
 
     // форма для добавления нового рабочего
+    // форма для добавления нового рабочего
     @GetMapping("/addemployee")
-    public String addEmployee(Model model){
+    public String addEmployee(Model model,
+                              @ModelAttribute("workers") Worker worker){
         model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
-        model.addAttribute("workers", new Worker());
         return "director/addEmployee";
     }
 
     // добавление нового рабочего
     @PostMapping("/addemployee")
-    public String createEmployee(@ModelAttribute("workers") @Valid Worker worker,
-                                 BindingResult bindingResult,
-                                 Model model){
-        if(bindingResult.hasErrors()){
+    public String createEmployee(@Valid @ModelAttribute("workers") Worker worker,
+                                 final BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
             model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
             return "director/addEmployee";
         }
@@ -73,8 +73,7 @@ public class DirectorController {
     // форма для изменения данных рабочего
     @GetMapping("/editemployee/{employeeId}")
     public String editEmployee(@PathVariable("employeeId") int employeeId,
-                              Model model){
-        model.addAttribute("workerId", userId.get());
+                               Model model){
         model.addAttribute("employee", WorkerDAO.showWorker(employeeId));
         model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         return "director/editEmployee";
@@ -82,13 +81,13 @@ public class DirectorController {
 
     // изменения рабочего
     @PostMapping("/editemployee/{employeeId}")
-    public String updateEmployee(@ModelAttribute("worker") Worker worker,
-                                 @PathVariable("employeeId") int employeeId,
-                                 Model model,
-                                 BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return "/director/directorHome";
-        model.addAttribute("workerId", userId.get());
+    public String updateEmployee(@ModelAttribute("employee") @Valid Worker worker,
+                                 final BindingResult bindingResult,
+                                 @PathVariable("employeeId") int employeeId, Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
+            return "director/editEmployee";}
+        model.addAttribute("worker", WorkerDAO.showWorker(userId.get()));
         WorkerDAO.update(employeeId, worker);
         return "redirect:/director/allemployees";
     }

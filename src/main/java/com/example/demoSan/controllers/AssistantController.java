@@ -47,7 +47,7 @@ public class AssistantController {
             model.addAttribute("workerId", userId.get());
             return "assistant/findprocedure";
         }
-        return "redirect:/assistant/" + userId.get() + "/allprocedures";
+        return "redirect:/assistant/allprocedures";
     }
 
     // вывод определенной процедуры

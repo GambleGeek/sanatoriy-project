@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,13 +10,27 @@
     <link rel="stylesheet" th:href="@{/css/style2.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Worker</title>
 </head>
 <body>
 
 <style>
 
-    body{overflow-y: scroll;}
+    .back{
+        background: url(https://cdn.discordapp.com/attachments/721424095169871983/925371186475581440/2.jpg) top right;
+        background-size: cover;
+        height: 200px;
+    }
+    .head {
+        background-color: #548ba8;
+    }
+
+    body {
+        overflow-y: scroll;
+    }
 
     .widget-left
     {
@@ -84,28 +98,28 @@
         <li>
             <a href="/manager/">
                 <i class='bx bxs-home'></i>
-                <span class="links_name">Home</span>
+                <span class="links_name">Startseite</span>
             </a>
-            <span class="tooltip">Home</span>
+            <span class="tooltip">Startseite</span>
         </li>
         <li>
             <a th:href="@{/manager/allclients}">
                 <i class='bx bx-user'></i>
-                <span class="links_name">Client List</span>
+                <span class="links_name">Klienten Liste</span>
             </a>
-            <span class="tooltip">Client List</span>
+            <span class="tooltip">Klienten Liste</span>
         </li>
         <li>
             <a th:href="@{/manager/allprocedures}">
                 <i class='bx bx-plus-medical' ></i>
-                <span class="links_name">Procedure List</span>
+                <span class="links_name">Prozeduren Liste</span>
             </a>
             <span class="tooltip">Procedure List</span>
         </li>
         <li>
             <a th:href="@{/manager/allclients/max}">
                 <i class='bx bx-chevron-up' ></i>
-                <span class="links_name">Max Visited Client</span>
+                <span class="links_name">Max. besuchter Kunde</span>
             </a>
             <span class="tooltip">MAX</span>
         </li>
@@ -124,6 +138,15 @@
             <span class="tooltip"
                   style="z-index: 1000;">Schedule</span>
         </li>
+        <div sec:authorize="hasRole('ROLE_DIRECTOR')">
+            <li>
+                <a th:href="@{/director/}">
+                    <i class='bx bx-arrow-back'></i>
+                    <span class="links_name">Back</span>
+                </a>
+                <span class="tooltip">Back</span>
+            </li>
+        </div>
     </ul>
     <div class="profile_content">
         <div class="profile">
@@ -145,7 +168,7 @@
 <div class="home_content"
      style="left: 75px;">
     <div class="">
-        <div class="rounded-top text-white d-flex" style="background-color: #000; height:200px;">
+        <div class="rounded-top text-white d-flex back">
             <div class="ms-4 d-flex flex-column" style="width: 150px; margin-top: 72px">
                 <img th:src="@{/image/{id}.jpg(id=${worker.getWorkerId()})}" alt="Worker Image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px;">
             </div>
@@ -172,11 +195,13 @@
                 </ul>
             </div>
 
-            <div class="col-md-4">
-                <form th:action="@{'/manager/findprocedure'}" method="post" class="d-flex">
-                    <input type="text" name="name" placeholder="Enter procedure's name" class="form-control">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
-                </form>
+            <div class="d-flex justify-content-end">
+                <div class="col-md-4">
+                    <form th:action="@{'/manager/findprocedure'}" method="post" class="d-flex">
+                        <input type="text" name="name" placeholder="Enter procedure's name" class="form-control">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
 
             <hr>
@@ -186,10 +211,10 @@
                 <div class="border px-3"
                      style="margin-right: 50px;
                 height: 30%;">
-                    <h5 class="mt-2 mb-4 fw-bold text-center">Погода в Бишкеке</h5>
-                    <div id="_MI_66984b5d9a980bd88b936ac37ca9bdf2" class="widget"
-                         style="margin-left: 3px;">
-                        <a href="https://ru.meteotrend.com/">Прогноз погоды</a></div>
+                    <h5 class="mt-2 mb-4 fw-bold text-center">Wetter in Bischkek</h5>
+                    <div id="_MI_dbba2d2a71eadd1ffc563722aa4881e2" class="widget" style="margin-left: 3px;">
+                        <a href="https://ru.meteotrend.com/">Прогноз погоды</a>
+                    </div>
 
                     <hr>
 
@@ -200,12 +225,11 @@
 
                 <!--    change-->
                 <!--Основной контент-->
-                <div class="col-md-9 rounded pb-3">
-                    <div class="d-flex justify-content-center row">
-                        <div class="col-md-8 text-center">
-                            <h2>Procedures List</h2>
+                <div class="col-md-9">
+                    <div class="col-md-12 border rounded pb-3">
+                        <div class="row card-header head pt-4">
+                            <h4 class="text-white">procedures list</h4>
                         </div>
-
 
                         <div class="my-3 text-center text-white py-2 px-3 bg-success">
                             <h4>Special OFFER for our Dear Employees! <span class="fs-3">-50%</span></h4>
@@ -213,12 +237,12 @@
 
                         <div th:each="procedure: ${myProcedures}">
 
-                            <div class="col-md-9 mt-3">
-                                <div class="row p-2 border rounded">
-                                    <div class="col-md-4 mt-1 mb-1">
+                            <div class="col-md-12 mt-3">
+                                <div class="row p-2 bg-white border rounded">
+                                    <div class="col-md-3 mt-1 mb-1">
                                         <img class="img-fluid" th:src="@{/image/{id}.jpg(id=${procedure.getId()})}">
                                     </div>
-                                    <div class="col-md-8 mt-1">
+                                    <div class="col-md-6 mt-1">
                                         <h5 th:text="${procedure.getName()}">Procedure name</h5>
                                         <div class="mt-1 mb-1">
                                             <p class="text-justify">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
@@ -226,7 +250,7 @@
                                     </div>
                                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                                         <div class="d-flex flex-row align-items-center">
-                                            <h4 class="mr-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4> <span class="text-success"><b>-50% Offer!</b></span>
+                                            <h4 class="mr-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4> <span class="text-success"><b>-50% Angebot!</b></span>
                                         </div>
                                         <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
                                         <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
@@ -244,12 +268,12 @@
 
                         <div th:each="procedure: ${restProcedures}">
 
-                            <div class="col-md-9 mt-3">
+                            <div class="col-md-12 mt-3">
                                 <div class="row p-2 bg-white border rounded">
-                                    <div class="col-md-4 mt-1 mb-1">
+                                    <div class="col-md-3 mt-1 mb-1">
                                         <img class="img-fluid" th:src="@{/image/{id}.jpg(id=${procedure.getId()})}">
                                     </div>
-                                    <div class="col-md-8 mt-1">
+                                    <div class="col-md-6 mt-1">
                                         <h5 th:text="${procedure.getName()}">Procedure name</h5>
                                         <div class="mt-1 mb-1">
                                             <p class="text-justify">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
@@ -257,13 +281,13 @@
                                     </div>
                                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                                         <div class="d-flex flex-row align-items-center">
-                                            <h4 class="mr-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4> <span class="text-success"><b>-50% Offer!</b></span>
+                                            <h4 class="mr-1" th:text="${procedure.getPrice() + 'som'}">PRICE</h4> <span class="text-success"><b>-50% Angebot!</b></span>
                                         </div>
                                         <h6 class="text-info" th:text="${procedure.getDaysOfWeekString()}">DAYS</h6>
                                         <p th:text="${procedure.getStringStart_at() + ' - ' + procedure.getStringEnd_at}"></p>
                                         <div class="d-flex flex-column mt-2">
                                             <a th:href="@{'/manager/allprocedures/{id}'(id=${procedure.getId()})}" class="btn btn-primary btn-sm" ole="button" aria-pressed="true">Details</a>
-                                            <form th:action="@{'/manager/' + ${workerId} + '/allprocedures/add' + ${procedure.getId()}}">
+                                            <form th:action="@{'/manager/allprocedures/add' + ${procedure.getId()}}">
                                                 <input class="btn btn-outline-primary btn-sm mt-2 w-100" type="submit" value="Buy">
                                             </form>
                                         </div>
@@ -293,7 +317,7 @@
     }
 
 </script>
-<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'66984b5d9a980bd88b936ac37ca9bdf2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/7206a0560b4352ff43b0b986ccf1c4f88edab7a6.css'],source:'meteotrend'});</script>
+<script type='text/javascript'>(function(d,w,t,k){function l(){if(typeof(w._MIOB_)=='undefined'){w._MIOB_={};}var m=w._MIOB_[t]=k;var s=d.createElement('script');m.p=('https:'==d.location.protocol?'https:':'http:');s.type='text/javascript';s.async=true;s.src=m.p+'//info.meteotrend.com/mt/'+m.t+'.js';d.body.appendChild(s);}if(d.readyState=='complete')l();else{if(w.attachEvent)w.attachEvent('onload',l);else w.addEventListener('load',l,false);}})(document,window,'dbba2d2a71eadd1ffc563722aa4881e2',{t:'4x6',sw:{"pname":1,"ccond":1,"ccdesc":1,"dayblock":1,"tblank":1},css:['{p}//info.meteotrend.com/mt/{t}.css','{p}//info.meteotrend.com/cs/43aa6b94b2431026f2350c1b297949bcee43eeb7.css'],source:'meteotrend'});</script>
 </body>
 
 </html>

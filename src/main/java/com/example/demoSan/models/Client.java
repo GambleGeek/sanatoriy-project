@@ -1,10 +1,22 @@
 package com.example.demoSan.models;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class Client {
-    private int id, height, weight, bloodtype, procedureNumber;
-    private String name, address, gender, rezus, illness;
+    private int id, bloodtype, procedureNumber;
+    @NotEmpty(message = "Name should not be empty")
+    private String name;
+    @NotEmpty(message = "Address should not be empty")
+    String address;
+    @NotNull(message = "Height should not be null")
+    int height;
+    @NotNull(message = "Weight should not be null")
+    int weight;
+    @NotEmpty(message = "Illness should not be empty")
+    String illness;
+    String gender, rezus;
     private Date birthdate;
 
     public Client(int id, int procedureNumber) {
