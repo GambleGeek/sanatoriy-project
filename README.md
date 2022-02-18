@@ -3,9 +3,13 @@
 Hello Aibek Musaev! This is group AIN-2-20. This is our project. 
 
 Members:
+
 Kerimov Adis
+
 Chandaev Bekzhan
+
 Budaychieva Aigerim
+
 
 Sanatorium
 
@@ -13,23 +17,32 @@ Password for accounts:
 
 Director: 
 
+
 Login: micasa 
+
 Password: 12345678
 
 Manager: 
 
+
 Login: youha 
+
 Password: 12345678
 
 Assistant: 
 
+
 Login: bekzhansan 
+
 Password: 12345678
+
 
 Client:
 
 Login: john
+
 Password: password
+
 
 Our Website:
 
