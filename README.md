@@ -23,7 +23,7 @@ Sanatorium
 Password for accounts:
 
 
---------------------------------------------------------------
+
 Director: 
 
 
