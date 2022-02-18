@@ -1,4 +1,4 @@
-# sanatoriy-project
+# San
 
 Hello Aibek Musaev! This is group AIN-2-20. This is our project. 
 
