@@ -1,2 +1,0 @@
-# sanatoriy-project
-Sanatorium
